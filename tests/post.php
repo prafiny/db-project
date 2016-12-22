@@ -28,11 +28,15 @@ class PostTest extends TestCase
     {
         $uid = self::$users[0]->id;
         $pid = Post\create($uid, "This is a sample text");
-        $this->assertTrue($pid !== null);
+        $this->assertNotNull($pid, "create should return the id of the new post");
         $post = Post\get($pid);
-        $this->assertEquals($post->author->id, $pid);
-        $this->assertEquals($post->text, "This is a sample text");
-        $this->assertEquals($post->id, $pid);
+        $this->assertObjectHasAttribute("author", $post, "Post object should have a author attribute");
+        $this->assertEquals($post->author, self::$users[0], "Post object should have a user object as the author attribute");
+        $this->assertObjectHasAttribute("text", $post, "Post object should have a text attribute");
+        $this->assertEquals($post->text, "This is a sample text", "Post object text attribute doesn't match with expected");
+        $this->assertObjectHasAttribute("id", $post, "Post object should have an id attribute");
+        $this->assertEquals($post->id, $pid, "Post object id doesn't match with expected");
+        $this->assertNull(Post\get(0), "get should return null if no post with a given id were found");
         return $pid;
     }
 
@@ -44,8 +48,10 @@ class PostTest extends TestCase
         $uid = self::$users[1]->id;
         $new_pid = Post\create($uid, "This is a sample response", $pid);
         $post = Post\get_with_joins($new_pid);
-        $this->assertTrue($post->responds_to == Post\get($pid));
-        $this->assertTrue(Post\get_responses($pid)[0] == Post\get($new_pid));
+        print_r($post);
+        $this->assertObjectHasAttribute("responds_to", $post, "Post object should have a responds_to attribute which contains the original message the post responds to.");
+        $this->assertEquals($post->responds_to, Post\get($pid), "get_with_joins should return a post object in responds_to.");
+        $this->assertEquals(Post\get_responses($pid)[0], Post\get($new_pid), "get_responds should list responses as post objects (simple, without joins)");
     }
 
     /**
@@ -56,8 +62,8 @@ class PostTest extends TestCase
         $uid = self::$users[0]->id;
         $pid = Post\create($uid, "@".self::$users[1]->username);
         $m = Post\get_mentioned($pid);
-        $this->assertEquals(count($m), 1);
-        $this->assertTrue(self::$users[1] == $m[0]);
+        $this->assertEquals(count($m), 1, "create should search for mentions");
+        $this->assertTrue(self::$users[1] == $m[0], "get_mentioned should return user objects");
         return $pid;
     }
 
