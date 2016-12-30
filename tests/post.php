@@ -72,11 +72,12 @@ class PostTest extends TestCase
      */  
     public function testLike($pid)
     {
-        $this->assertTrue(User\like(self::$users[1]->id, $pid));
+        $this->assertTrue(Post\like(self::$users[1]->id, $pid), "like should return true if everything went fine");
         $post = Post\get_with_joins($pid);
-        $this->assertEquals(count($post->likes), 1);
-        $this->assertTrue($post->likes[0] == self::$users[1]);
-        $this->assertTrue(User\unlike(self::$users[1]->id, $pid));
+        $this->assertObjectHasAttribute('likes', $post, "joined post object should have a likes attribute")
+        $this->assertEquals(count($post->likes), 1, "get_with_joins should return list of users that liked the post");
+        $this->assertTrue($post->likes[0] == self::$users[1], '$post->likes should be an array of user objects');
+        $this->assertTrue(Post\unlike(self::$users[1]->id, $pid));
         $post = Post\get_with_joins($pid);
         $this->assertEmpty($post->likes);
     }
