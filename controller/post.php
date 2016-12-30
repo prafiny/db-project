@@ -14,7 +14,7 @@ function post_page($id) {
         $liked = in_array($user->id, array_map(function($el) { return $el->id; }, $post->likes));
     }
     foreach($responses as $response) {
-        $response->responses = \Model\Post\get_responses($id);
+        $response->responses = \Model\Post\get_responses($response->id);
     }
     require '../view/post.php';
 }
@@ -90,7 +90,7 @@ function like($id) {
         header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
         return;
     }
-    if(\Model\Post\like($id)) {
+    if(\Model\Post\like($user->id, $id)) {
         \Session\set_success("Your like was counted.");
         header("Location: post.php?id=".$id);
     }
@@ -111,7 +111,7 @@ function unlike($id) {
         header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
         return;
     }
-    if(\Model\Post\unlike($id)) {
+    if(\Model\Post\unlike($user->id, $id)) {
         \Session\set_success("Your like was removed.");
         header("Location: post.php?id=".$id);
     }
