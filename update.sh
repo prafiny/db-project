@@ -17,14 +17,14 @@ if [ $# -eq 0 ]; then
     unzip master.zip
     for i in "${files[@]}"
     do
-            rm -r $i
+            rm -r -f $i
     done
     bash db-project-master/update.sh --new-version
 else
     for i in "${files[@]}"
     do
-            cp db-project-master/$i .
+            cp -r db-project-master/$i .
     done
-    rm db-project-master
+    rm -r db-project-master
     rm master.zip
 fi
