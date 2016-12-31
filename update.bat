@@ -1,1 +1,1 @@
-powershell.exe "Get-Content .\t.ps1 | powershell.exe -noprofile -"
+powershell.exe "Get-Content .\update.ps1 | powershell.exe -noprofile -"
