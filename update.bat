@@ -1,0 +1,1 @@
+powershell.exe "Get-Content .\t.ps1 | powershell.exe -noprofile -"
