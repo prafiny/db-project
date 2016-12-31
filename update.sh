@@ -4,6 +4,7 @@ files="autoload.php composer.json composer-setup.php controller instructions lib
 if [ $# -eq 0 ]; then
     wget -O master.tar.gz http://github.com/prafiny/db-project/archive/master.tar.gz
     tar xvf master.tar.gz
+    rm master.tar.gz
     for i in "${files}"
     do
             rm -r -f $i
@@ -16,9 +17,7 @@ else
             cp -r db-project-master/$i .
     done
     rm -r db-project-master
-    rm master.zip
-    mkdir bin
-    php composer-setup.php --install-dir=bin --filename=composer
-    php bin/composer update
+    php composer-setup.php --install-dir=. --filename=composer
+    php composer update
 fi
 
