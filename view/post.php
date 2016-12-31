@@ -28,7 +28,7 @@ main_template(get_defined_vars(), function($vars) {
                             <?php
                                 if($user) {
                                     if($liked) {?>
-                            <div class="pure-u-1-3"><a href="post.php?id=<?php echo $post->id; ?>&unlike">Unike</a> (<?php echo $stats->nb_likes; ?>)</div>
+                            <div class="pure-u-1-3"><a href="post.php?id=<?php echo $post->id; ?>&unlike">Unlike</a> (<?php echo $stats->nb_likes; ?>)</div>
                             <?php   }
                                 else {?>
                             <div class="pure-u-1-3"><a href="post.php?id=<?php echo $post->id; ?>&like">Like</a> (<?php echo $stats->nb_likes; ?>)</div>
@@ -38,7 +38,7 @@ main_template(get_defined_vars(), function($vars) {
                     </div>
                     <form class="pure-form write-twirp answer-twirp inner-block" action="post.php?id=<?php echo $post->id;?>" method="post">
                         <fieldset>
-                            <textarea name="post_content" rows="1">@<?php echo htmlspecialchars($post->author->username); ?></textarea>
+                            <textarea name="text" rows="1">@<?php echo htmlspecialchars($post->author->username); ?> </textarea>
                             <button type="submit" class="pure-button pure-button-primary">Respond</button>
                         </fieldset>
                     </form>

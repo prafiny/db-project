@@ -48,7 +48,6 @@ class PostTest extends TestCase
         $uid = self::$users[1]->id;
         $new_pid = Post\create($uid, "This is a sample response", $pid);
         $post = Post\get_with_joins($new_pid);
-        print_r($post);
         $this->assertObjectHasAttribute("responds_to", $post, "Post object should have a responds_to attribute which contains the original message the post responds to.");
         $this->assertEquals($post->responds_to, Post\get($pid), "get_with_joins should return a post object in responds_to.");
         $this->assertEquals(Post\get_responses($pid)[0], Post\get($new_pid), "get_responds should list responses as post objects (simple, without joins)");
@@ -68,13 +67,13 @@ class PostTest extends TestCase
     }
 
     /**
-     * @depends testRespond
+     * @depends testMentionUser
      */  
     public function testLike($pid)
     {
         $this->assertTrue(Post\like(self::$users[1]->id, $pid), "like should return true if everything went fine");
         $post = Post\get_with_joins($pid);
-        $this->assertObjectHasAttribute('likes', $post, "joined post object should have a likes attribute")
+        $this->assertObjectHasAttribute('likes', $post, "joined post object should have a likes attribute");
         $this->assertEquals(count($post->likes), 1, "get_with_joins should return list of users that liked the post");
         $this->assertTrue($post->likes[0] == self::$users[1], '$post->likes should be an array of user objects');
         $this->assertTrue(Post\unlike(self::$users[1]->id, $pid));
@@ -87,8 +86,8 @@ class PostTest extends TestCase
      */
     public function testSearch()
     {
-        $pid1 = Post\create($users[0]->id, "this is a searchid1 test");
-        $pid2 = Post\create($users[1]->id, "this searchid2 is a test");
+        $pid1 = Post\create(self::$users[0]->id, "this is a searchid1 test");
+        $pid2 = Post\create(self::$users[1]->id, "this searchid2 is a test");
         $s = Post\search("searchid1");
         $this->assertEquals(count($s), 1, "search should return a list of post objects");
         $this->assertEquals($s[0]->id, $pid1, "search should perform a substring matching on text");
@@ -104,13 +103,13 @@ class PostTest extends TestCase
     {
         foreach(Post\list_all() as $post)
         {
-            Post\destroy($post->id);
+            $this->assertTrue(Post\destroy($post->id), "deleting a post should return true");
         }
-        $pid1 = Post\create($users[0]->id, "this is a searchid1 test");
-        $pid2 = Post\create($users[1]->id, "this is a searchid2 test");
+        $pid1 = Post\create(self::$users[0]->id, "this is a searchid1 test");
+        $pid2 = Post\create(self::$users[1]->id, "this is a searchid2 test");
         $this->assertTrue(Post\destroy($pid1), "deleting a post should return true");
         $posts = Post\list_all();
-        $this->assertEquals(count($posts), 1, "deleted post should no longer appear in list_all");
+        $this->assertEquals(1, count($posts), "deleted post should no longer appear in list_all");
         $this->assertEquals($posts[0]->id, $pid2, "destroy should delete the right post");
     }
 
@@ -123,12 +122,13 @@ class PostTest extends TestCase
         {
             Post\destroy($post->id);
         }
-        $pid1 = Post\create($users[0]->id, "this is a searchid1 test");
-        $pid2 = Post\create($users[1]->id, "this is a searchid2 test");
+        $pid1 = Post\create(self::$users[0]->id, "this is a searchid1 test");
+        sleep(1);
+        $pid2 = Post\create(self::$users[1]->id, "this is a searchid2 test");
         $posts = Post\list_all("DESC");
         $this->assertTrue($posts[0]->id == $pid2 && $posts[1]->id == $pid1, "list_all('DESC') should bring the posts in descending order along publication datetime");
         $posts = Post\list_all("ASC");
-        $this->assertTrue($posts[0]->id == $pid2 && $posts[1]->id == $pid1, "list_all('ASC') should bring the posts in ascending order along publication datetime");
+        $this->assertTrue($posts[0]->id == $pid1 && $posts[1]->id == $pid2, "list_all('ASC') should bring the posts in ascending order along publication datetime");
     }
 
     public static function tearDownAfterClass()
