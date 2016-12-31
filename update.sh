@@ -27,4 +27,6 @@ else
     done
     rm -r db-project-master
     rm master.zip
+    php composer-setup.php --install-dir=bin --filename=composer
+    php bin/composer update
 fi
