@@ -1,8 +1,10 @@
 #!/bin/bash -e
 files="autoload.php composer.json composer-setup.php controller instructions lib README.md tests update.bat update.ps1 update.sh view www"
 
-if [ $# -eq 0 ]; then
-    wget -O master.tar.gz http://github.com/prafiny/db-project/archive/master.tar.gz
+if [ $# -eq 0 ] || [ $1 == "--no-dl" ]; then
+    if [ $1 != "--no-dl" ]; then
+        wget -O master.tar.gz http://github.com/prafiny/db-project/archive/master.tar.gz
+    fi
     tar xvf master.tar.gz
     rm master.tar.gz
     for i in "${files}"
