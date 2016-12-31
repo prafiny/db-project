@@ -19,6 +19,7 @@ if [ $# -eq 0 ]; then
     do
             rm -r -f $i
     done
+    rm -r -f bin
     bash db-project-master/update.sh --new-version
 else
     for i in "${files[@]}"
@@ -27,6 +28,7 @@ else
     done
     rm -r db-project-master
     rm master.zip
+    mkdir bin
     php composer-setup.php --install-dir=bin --filename=composer
     php bin/composer update
 fi
