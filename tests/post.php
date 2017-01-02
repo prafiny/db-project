@@ -68,6 +68,17 @@ class PostTest extends TestCase
 
     /**
      * @depends testMentionUser
+     */      
+    public function testDestroy($pid)
+    {
+        $pid1 = Post\create(self::$users[0]->id, "this is a searchid1 test");
+        $this->assertTrue(Post\destroy($pid1), "deleting a post should return true");
+        $this->assertNull(Post\get($pid1), "destroy should delete the right post and get should return null on it");
+        return $pid;
+    }
+
+    /**
+     * @depends testDestroy
      */  
     public function testLike($pid)
     {
@@ -83,38 +94,6 @@ class PostTest extends TestCase
 
     /**
      * @depends testLike
-     */
-    public function testSearch()
-    {
-        $pid1 = Post\create(self::$users[0]->id, "this is a searchid1 test");
-        $pid2 = Post\create(self::$users[1]->id, "this searchid2 is a test");
-        $s = Post\search("searchid1");
-        $this->assertEquals(count($s), 1, "search should return a list of post objects");
-        $this->assertEquals($s[0]->id, $pid1, "search should perform a substring matching on text");
-        $s = Post\search("searchid2");
-        $this->assertEquals(count($s), 1);
-        $this->assertEquals($s[0]->id, $pid2);
-    }
-
-    /**
-     * @depends testSearch
-     */      
-    public function testDestroy()
-    {
-        foreach(Post\list_all() as $post)
-        {
-            $this->assertTrue(Post\destroy($post->id), "deleting a post should return true");
-        }
-        $pid1 = Post\create(self::$users[0]->id, "this is a searchid1 test");
-        $pid2 = Post\create(self::$users[1]->id, "this is a searchid2 test");
-        $this->assertTrue(Post\destroy($pid1), "deleting a post should return true");
-        $posts = Post\list_all();
-        $this->assertEquals(1, count($posts), "deleted post should no longer appear in list_all");
-        $this->assertEquals($posts[0]->id, $pid2, "destroy should delete the right post");
-    }
-
-    /**
-     * @depends testDestroy
      */      
     public function testLists()
     {
@@ -129,6 +108,28 @@ class PostTest extends TestCase
         $this->assertTrue($posts[0]->id == $pid2 && $posts[1]->id == $pid1, "list_all('DESC') should bring the posts in descending order along publication datetime");
         $posts = Post\list_all("ASC");
         $this->assertTrue($posts[0]->id == $pid1 && $posts[1]->id == $pid2, "list_all('ASC') should bring the posts in ascending order along publication datetime");
+    }
+
+    /**
+     * @depends testLists
+     */
+    public function testSearch()
+    {
+        foreach(Post\list_all() as $post)
+        {
+            Post\destroy($post->id);
+        }
+        $pid1 = Post\create(self::$users[0]->id, "this is a searchid1 test");
+        $pid2 = Post\create(self::$users[1]->id, "this searchid2 is a test");
+        $pid3 = Post\create(self::$users[1]->id, "this searchi is a test");
+        $s = Post\search("searchid1");
+        $this->assertEquals(count($s), 1, "search should return a list of post objects");
+        $this->assertEquals($s[0]->id, $pid1, "search should return a list of post objects");
+        $s = Post\search("searchid");
+        $this->assertEquals(count($s), 2);
+        $ms = array_map(function($e) { return $e->id; }, $s);
+        $this->assertContains($pid2, $ms, "search should perform a substring matching on text");
+        $this->assertContains($pid1, $ms, "search should perform a substring matching on text");
     }
 
     public static function tearDownAfterClass()
