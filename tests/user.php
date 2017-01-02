@@ -66,7 +66,7 @@ class UserTest extends TestCase
             "user1@mail.comlol",
             ""
         );
-        $this->assertTrue(User\destroy($duid), "destroy should return true if everything went fine")
+        $this->assertTrue(User\destroy($duid), "destroy should return true if everything went fine");
         $this->assertNull(User\get($duid), "Deleted user should no more exist");
         return $uid;
     }    
