@@ -68,11 +68,14 @@ function create($author_id, $text, $response_to=null) {
  * @return an array of hashtags
  */
 function extract_hashtags($text) {
-    return array_filter(
-        explode($text, " "),
-        function($c) {
-            return $c !== "" || $c[0] == "#";
-        }
+    return array_map(
+        function($el) { return substr($el, 1); },
+        array_filter(
+            explode(" ", $text),
+            function($c) {
+                return $c !== "" && $c[0] == "#";
+            }
+        )
     );
 }
 
@@ -82,11 +85,14 @@ function extract_hashtags($text) {
  * @return an array of usernames
  */
 function extract_mentions($text) {
-    return array_filter(
-        explode($text, " "),
-        function($c) {
-            return $c !== "" || $c[0] == "@";
-        }
+    return array_map(
+        function($el) { return substr($el, 1); },
+        array_filter(
+            explode(" ", $text),
+            function($c) {
+                return $c !== "" && $c[0] == "@";
+            }
+        )
     );
 }
 
