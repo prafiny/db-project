@@ -56,6 +56,16 @@ class PostTest extends TestCase
     /**
      * @depends testRespond
      */  
+    public function testDestroy()
+    {
+        $pid1 = Post\create(self::$users[0]->id, "this is a searchid1 test");
+        $this->assertTrue(Post\destroy($pid1), "deleting a post should return true");
+        $this->assertNull(Post\get($pid1), "destroy should delete the right post and get should return null on it");
+    }
+
+    /**
+     * @depends testDestroy
+     */  
     public function testMentionUser()
     {
         $uid = self::$users[0]->id;
@@ -63,25 +73,15 @@ class PostTest extends TestCase
         $m = Post\get_mentioned($pid);
         $this->assertEquals(count($m), 1, "create should search for mentions");
         $this->assertTrue(self::$users[1] == $m[0], "get_mentioned should return user objects");
-        return $pid;
     }
 
     /**
      * @depends testMentionUser
      */      
-    public function testDestroy($pid)
+    public function testLike()
     {
-        $pid1 = Post\create(self::$users[0]->id, "this is a searchid1 test");
-        $this->assertTrue(Post\destroy($pid1), "deleting a post should return true");
-        $this->assertNull(Post\get($pid1), "destroy should delete the right post and get should return null on it");
-        return $pid;
-    }
-
-    /**
-     * @depends testDestroy
-     */  
-    public function testLike($pid)
-    {
+        $uid = self::$users[0]->id;
+        $pid = Post\create($uid, "test like");
         $this->assertTrue(Post\like(self::$users[1]->id, $pid), "like should return true if everything went fine");
         $post = Post\get_with_joins($pid);
         $this->assertObjectHasAttribute('likes', $post, "joined post object should have a likes attribute");
