@@ -66,35 +66,6 @@ class PostTest extends TestCase
     /**
      * @depends testDestroy
      */  
-    public function testMentionUser()
-    {
-        $uid = self::$users[0]->id;
-        $pid = Post\create($uid, "@".self::$users[1]->username);
-        $m = Post\get_mentioned($pid);
-        $this->assertEquals(count($m), 1, "create should search for mentions");
-        $this->assertTrue(self::$users[1] == $m[0], "get_mentioned should return user objects");
-    }
-
-    /**
-     * @depends testMentionUser
-     */      
-    public function testLike()
-    {
-        $uid = self::$users[0]->id;
-        $pid = Post\create($uid, "test like");
-        $this->assertTrue(Post\like(self::$users[1]->id, $pid), "like should return true if everything went fine");
-        $post = Post\get_with_joins($pid);
-        $this->assertObjectHasAttribute('likes', $post, "joined post object should have a likes attribute");
-        $this->assertEquals(count($post->likes), 1, "get_with_joins should return list of users that liked the post");
-        $this->assertTrue($post->likes[0] == self::$users[1], '$post->likes should be an array of user objects');
-        $this->assertTrue(Post\unlike(self::$users[1]->id, $pid));
-        $post = Post\get_with_joins($pid);
-        $this->assertEmpty($post->likes, "post likes list should be empty if no user liked the post");
-    }
-
-    /**
-     * @depends testLike
-     */      
     public function testLists()
     {
         foreach(Post\list_all() as $post)
@@ -132,10 +103,38 @@ class PostTest extends TestCase
         $this->assertContains($pid1, $ms, "search should perform a substring matching on text");
     }
 
+    /**
+     * @depends testSearch
+     */
+    public function testMentionUser()
+    {
+        $uid = self::$users[0]->id;
+        $pid = Post\create($uid, "@".self::$users[1]->username);
+        $m = Post\get_mentioned($pid);
+        $this->assertEquals(count($m), 1, "create should search for mentions");
+        $this->assertTrue(self::$users[1] == $m[0], "get_mentioned should return user objects");
+    }
+
+    /**
+     * @depends testMentionUser
+     */      
+    public function testLike()
+    {
+        $uid = self::$users[0]->id;
+        $pid = Post\create($uid, "test like");
+        $this->assertTrue(Post\like(self::$users[1]->id, $pid), "like should return true if everything went fine");
+        $post = Post\get_with_joins($pid);
+        $this->assertObjectHasAttribute('likes', $post, "joined post object should have a likes attribute");
+        $this->assertEquals(count($post->likes), 1, "get_with_joins should return list of users that liked the post");
+        $this->assertTrue($post->likes[0] == self::$users[1], '$post->likes should be an array of user objects');
+        $this->assertTrue(Post\unlike(self::$users[1]->id, $pid));
+        $post = Post\get_with_joins($pid);
+        $this->assertEmpty($post->likes, "post likes list should be empty if no user liked the post");
+    }
+
     public static function tearDownAfterClass()
     {
         \Db::flush();
     }
 }
 ?>
-
