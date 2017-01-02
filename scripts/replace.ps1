@@ -1,3 +1,4 @@
+$DOCDIR = (Get-Item -Path ".\" -Verbose).FullName
 $myArray = "autoload.php","composer.json","composer-setup.php","controller","instructions","lib","README.md","tests","view","www","scripts","update_unix.sh"
 $shell = new-object -com shell.application
 foreach($item in $myArray)
