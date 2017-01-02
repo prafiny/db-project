@@ -1,5 +1,5 @@
 #!/bin/bash -e
-files=(autoload.php composer.json composer-setup.php controller instructions lib README.md tests update_unix.sh scripts view www)
+files=(autoload.php composer.json composer-setup.php controller instructions lib README.md tests update_unix.sh update_win.bat scripts view www)
 
 if [ $# -eq 0 ]; then
     echo "Downloading master.zip"
@@ -16,7 +16,7 @@ if [ $# -eq 0 ]; then
     echo "--------"
     echo ""
     rm -r -f bin
-    bash db-project-master/update.sh --new-version
+    bash db-project-master/update_unix.sh --new-version
 else
     for i in "${files[@]}"
     do
