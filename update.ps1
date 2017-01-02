@@ -16,6 +16,5 @@ $myArray = autoload.php,composer.json,composer-setup.php,controller,instructions
 foreach($item in $myArray)
 {
 Remove-Item -path $DOCDIR\$item -recurse
-$shell.Namespace($destination).copyhere(db-project-master\$item)
+$shell.Namespace($DOCDIR\).copyhere(db-project-master\$item)
 }
-
