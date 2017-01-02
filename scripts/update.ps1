@@ -18,11 +18,12 @@ Expand-ZIPFile -File "$DOCDIR\master.zip" -Destination "$DOCDIR\"; Remove-Item "
 "Updating"
 "--------"
 ""
-$myArray = "autoload.php","composer.json","composer-setup.php","controller","instructions","lib","README.md","tests","update.sh","view","www","update.ps1","replace.ps1"
+$myArray = "autoload.php","composer.json","composer-setup.php","controller","instructions","lib","README.md","tests","view","www","scripts","update_unix.sh"
+
 $shell = new-object -com shell.application
 foreach($item in $myArray)
 {
-Remove-Item -path $DOCDIR\$item -recurse
+if( (Test-Path $DOCDIR\$item) ) { Remove-Item -path $DOCDIR\$item -recurse }
 }
 
 Get-Content .\db-project-master\scripts\replace.ps1 | powershell.exe -noprofile -
