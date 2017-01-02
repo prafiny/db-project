@@ -57,6 +57,22 @@ class UserTest extends TestCase
     /**
      * @depends testModify
      */
+    public function testDestroy($uid) 
+    {
+        $duid = User\create(
+            "user1todelete",
+            "User 1todelete",
+            "passwordlol",
+            "user1@mail.comlol",
+            ""
+        );
+        $this->assertNull(User\get($duid), "Deleted user should no more exist");
+        return $uid;
+    }    
+
+    /**
+     * @depends testDestroy
+     */
     public function testChangePassword($uid)
     {
         $this->assertTrue(
@@ -149,18 +165,6 @@ class UserTest extends TestCase
         $this->assertEmpty(User\get_followings($users[0]->id), "unfollow should make that a user is unfollowed");
         $this->assertEmpty(User\get_followers($users[1]->id));
         return $users;
-    }
-
-    /**
-     * @depends testFollow
-     */
-    public function testDestroy($users) 
-    {
-        $this->assertTrue(User\destroy($users[0]->id));
-        $l = User\list_all();
-        $this->assertNull(User\get($users[0]->id), "Deleted user should no more exist");
-        $this->assertEquals(1, count($l));
-        $this->assertEquals($l[0], $users[1]);
     }
 
     public static function tearDownAfterClass()
