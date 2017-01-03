@@ -24,7 +24,7 @@ class UserTest extends TestCase
         $this->assertObjectHasAttribute("email", $user, "User object should have an email attribute");
         $this->assertEquals($user->email, "user1@mail.com", "Email should be 'user1@mail.com' instead of '$user->email'");
         $this->assertEquals($user, User\check_auth($user->username, "password"), "check_auth not working");
-        $this->assertEquals($user, User\check_auth_id($uid, "password"), "check_auth_id not working");
+        $this->assertEquals($user, User\check_auth_id($uid, User\hash_password("password")), "check_auth_id not working");
 
         $this->assertNull(User\get(1000), "get should return null if no user were fould");
         return $uid;
@@ -84,7 +84,7 @@ class UserTest extends TestCase
         );
         $user = User\get($uid);
         $this->assertTrue($user == User\check_auth($user->username, "new password"), "Modify should set the new password properly");
-        $this->assertTrue($user == User\check_auth_id($uid, "new password"), "Modify should set the new password properly");
+        $this->assertTrue($user == User\check_auth_id($uid, User\hash_password("new password")), "Modify should set the new password properly");
         return $uid;
     }
     
