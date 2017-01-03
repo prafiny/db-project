@@ -13,19 +13,19 @@ This should output the path to the default PHP install which comes preinstalled 
 
     /usr/bin/php
 
-Now, We just need to swap this over to the PHP that is installed with MAMP, which is located at `/Applications/MAMP/bin/php/php5.4.10/bin` (MAMP 2.1.3)
+Now, We just need to swap this over to the PHP that is installed with MAMP, which is located at `/Applications/MAMP/bin/php/php7.0.10/bin` (MAMP 2.1.3)
 
 To do this, We need to edit the `.bash_profile` and add the MAMP version of PHP to the PATH variable.
 
 #### Follow these simple steps:
 ---
-1. Within the Terminal, run `vim ~/.bash_profile`
+1. Within the Terminal, run `nano ~/.bash_profile`
 
-2. Type `i` and then paste the following at the top of the file:
+2. Paste the following at the top of the file:
 
         export PATH=/Applications/MAMP/bin/php/php7.0.10/bin:$PATH
 
-3. Hit `ESC`, Type `:wq`, and hit `Enter`
+3. Quit and save 
 
 4. In Terminal, run `source ~/.bash_profile`
 
