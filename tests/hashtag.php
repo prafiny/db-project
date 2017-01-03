@@ -43,6 +43,8 @@ class HashtagTest extends TestCase
         $this->assertTrue(in_array("hashtag0", $l));
         $this->assertTrue(in_array("hashtag1", $l));
         $this->assertTrue(in_array("hashtag2", $l));
+        $this->assertTrue(in_array("hash", $l));
+        $this->assertTrue(in_array("tag", $l));
         $this->assertTrue(in_array("hashtag3", $l));
     }
 
@@ -52,7 +54,6 @@ class HashtagTest extends TestCase
         $this->assertEquals($l[0], "hashtag3");
         $this->assertEquals($l[0], "hashtag2");
         $this->assertEquals($l[0], "hashtag1");
-        $this->assertEquals($l[0], "hashtag0");
     }
 
     public function testGetPosts()
