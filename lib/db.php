@@ -16,7 +16,6 @@ class Db {
         $config = Yaml::parse(file_get_contents(dirname(__FILE__)."/../config/db.yaml"));
         $o = $testing ? $config["test"] : $config["app"];
         $port = isset($o["port"]) ? ";port=".$o["port"]."" : "";
-        print_r('mysql:host='.$o["server"].''.$port.';dbname='.$o["db"].';charset=utf8');
         
         self::$connection = new PDO('mysql:host='.$o["server"].''.$port.';dbname='.$o["db"].';charset=utf8', $o["username"], $o["password"]);
         self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
