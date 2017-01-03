@@ -130,11 +130,6 @@ The User entity represents a user and its properties:
 \item its avatar (or profile picture)
 \end{itemize}
 
-\begin{bclogo}[logo=\bcattention, noborder=true, barre=none]{Important!}
-	The deletion behaviour must be allowing deleting user which is following a user or followed by a user. \textbf{To see and modify the deletion policy in phpMyAdmin, you must go in the table view → Structure → Relation view.}
-		
-\end{bclogo}
-
 \subsection{Creation, getting, password management and authentication}
 The following functions have to be coded before running the unit tests. They are in charge of handling both the creation and the fetching of the user objects.
 
@@ -195,8 +190,13 @@ This function updates only a user's password. This function hashes the new passw
 \subsubsection{\texttt{change\_avatar(\$uid, \$avatar\_path)}}
 This function changes the avatar of the user. The provided path is a temporary path and therefore the file has to be saved somewhere else. Returns a boolean.
 
-\subsection{\texttt{destroy(\$id)}}
+\subsubsection{\texttt{destroy(\$id)}}
 This function deletes a user entry. It returns a boolean.
+
+\begin{bclogo}[logo=\bcattention, noborder=true, barre=none]{Important!}
+	The deletion behaviour must be allowing deleting user which is following a user or followed by a user. \textbf{To see and modify the deletion policy in phpMyAdmin, you must go in the table view → Structure → Relation view.}
+		
+\end{bclogo}
 
 \subsection{Searching and listing}
 The user objects can be searched for or listed. The two following functions can be coded separately.
