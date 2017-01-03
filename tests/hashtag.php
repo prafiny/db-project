@@ -39,6 +39,9 @@ class HashtagTest extends TestCase
         $this->assertContains("hashtag1", $l);
         $this->assertContains("hashtag2", $l);
         $this->assertContains("hashtag3", $l);
+        $this->assertContains("hash", $l);
+        $this->assertContains("tag", $l);
+        $this->assertContains("hashtag3", $l);
     }
 
     /**
@@ -47,7 +50,6 @@ class HashtagTest extends TestCase
     public function testListPopularHashtags()
     {
         $l = Hashtag\list_popular_hashtags(5);
-        print_r($l);        
         $this->assertEquals($l[0], "hashtag3");
         $this->assertEquals($l[1], "hashtag2");
         $this->assertEquals($l[2], "hashtag1");
