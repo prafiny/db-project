@@ -7,6 +7,7 @@ class PostTest extends TestCase
     protected static $users;
     public static function setUpBeforeClass()
     {
+        \Db::flush();
         User\create(
             "userpost1",
             "User 1",
@@ -134,7 +135,6 @@ class PostTest extends TestCase
 
     public static function tearDownAfterClass()
     {
-        \Db::flush();
     }
 }
 ?>

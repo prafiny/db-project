@@ -6,6 +6,7 @@ class UserTest extends TestCase
 {
     public function testCreate()
     {
+        \Db::flush();
         $uid = User\create(
             "user1",
             "User 1",
@@ -170,7 +171,6 @@ class UserTest extends TestCase
 
     public static function tearDownAfterClass()
     {
-        \Db::flush();
     }
 }
 ?>

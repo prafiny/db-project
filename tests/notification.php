@@ -10,6 +10,7 @@ class NotificationTest extends TestCase
     protected static $uids;
     public static function setUpBeforeClass()
     {
+        \Db::flush();
         self::$uids = [];
         self::$uids[] = User\create(
             "userpost1",
@@ -108,7 +109,6 @@ class NotificationTest extends TestCase
 
     public static function tearDownAfterClass()
     {
-        \Db::flush();
     }
 
 }

@@ -11,6 +11,7 @@ class HashtagTest extends TestCase
 
     public static function setUpBeforeClass()
     {
+        \Db::flush();
         self::$uid = User\create(
             "userpost1",
             "User 1",
@@ -23,7 +24,7 @@ class HashtagTest extends TestCase
         self::$pids[] = Post\create(self::$uid, "This is a sample text #hashtag1");               
         self::$pids[] = Post\create(self::$uid, "This is a sample text #hashtag2");               
         self::$pids[] = Post\create(self::$uid, "This is a sample text #hashtag2");               
-        self::$pids[] = Post\create(self::$uid, "This is a sample text #hashtag2");               
+        self::$pids[] = Post\create(self::$uid, "This is a sample text #hashtag2");
         self::$pids[] = Post\create(self::$uid, "This is a sample text #hashtag3");               
         self::$pids[] = Post\create(self::$uid, "This is a sample text #hashtag3");               
         self::$pids[] = Post\create(self::$uid, "This is a sample text #hashtag3");               
@@ -53,7 +54,6 @@ class HashtagTest extends TestCase
         $this->assertEquals($l[0], "hashtag3");
         $this->assertEquals($l[1], "hashtag2");
         $this->assertEquals($l[2], "hashtag1");
-        $this->assertEquals($l[3], "hashtag0");
     }
 
     /**
@@ -72,13 +72,12 @@ class HashtagTest extends TestCase
     public function testGetRelatedHashtags()
     {
         $h = Hashtag\get_related_hashtags("hash", 5);
-        $this->assertEquals(count($h), 1);
+        $this->assertEquals(1, count($h));
         $this->assertEquals($h[0], "tag");
     }
 
     public static function tearDownAfterClass()
     {
-        \Db::flush();
     }
 }
 ?>
