@@ -73,7 +73,7 @@ class HashtagTest extends TestCase
     {
         $h = Hashtag\get_related_hashtags("hash", 5);
         $this->assertEquals(1, count($h), "get_related_hashtags should return an array of every related hashtags names");
-        $this->assertEquals($h[0], "tag");
+        $this->assertEquals($h[0], "tag", "get_related_hashtags should return an array of every related hashtags names");
     }
 
     public static function tearDownAfterClass()
