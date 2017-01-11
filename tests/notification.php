@@ -74,13 +74,13 @@ class NotificationTest extends TestCase
         $this->assertNotEquals($n[0]->reading_date, null);
 
         Post\destroy(self::$pids[0]);
-        $n = Notification\get_liked_notifications(self::$uids[1]);
+        $n = Notification\get_mentioned_notifications(self::$uids[1]);
         $this->assertEmpty($n);
     }
 
     /**
      * @depends testMentionedNotification
-     */  
+     */
     public function testFollowedNotification()
     {
         User\follow(self::$uids[0], self::$uids[1]);
