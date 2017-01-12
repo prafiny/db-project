@@ -37,10 +37,10 @@ class NotificationTest extends TestCase
     {
         Post\like(self::$uids[0], self::$pids[1]);
         $n = Notification\get_liked_notifications(self::$uids[1]);
-        $this->assertEquals(count($n), 1, "get_liked_notifications should return an array of liked notifications");
-        $this->assertEquals($n[0]->post->id, self::$pids[1], "post in 'liked' notification should be the one liked");
-        $this->assertEquals($n[0]->liked_by->id, self::$uids[0], "liked_by in 'liked' notification should be the user who liked the post");
-        $this->assertEquals($n[0]->type, "liked", "the notification should have a type attribute equal to 'liked'");
+        $this->assertEquals(1, count($n), "get_liked_notifications should return an array of liked notifications");
+        $this->assertEquals(self::$pids[1], $n[0]->post->id, "post in 'liked' notification should be the one liked");
+        $this->assertEquals(self::$uids[0], $n[0]->liked_by->id, "liked_by in 'liked' notification should be the user who liked the post");
+        $this->assertEquals("liked", $n[0]->type, "the notification should have a type attribute equal to 'liked'");
         $this->assertObjectHasAttribute('date', $n[0], "the liked notification should have a date attribute");
         $this->assertObjectHasAttribute('reading_date', $n[0], "the liked notification should have a reading_date attribute");
 
@@ -61,10 +61,10 @@ class NotificationTest extends TestCase
     {
         Post\mention_user(self::$pids[0], self::$uids[1]);
         $n = Notification\get_mentioned_notifications(self::$uids[1]);
-        $this->assertEquals(count($n), 1 , "get_mentioned_notifications should return an array of mentioned notifications");
-        $this->assertEquals($n[0]->mentioned_by->id, self::$uids[0], "mentioned_by should be the person who created the post in which the user was mentioned");
-        $this->assertEquals($n[0]->post->id, self::$pids[0], "post should be the post in which the user was mentioned");
-        $this->assertEquals($n[0]->type, "mentioned", "the notification should have a type attribute equal to 'mentioned'");
+        $this->assertEquals(1, count($n), "get_mentioned_notifications should return an array of mentioned notifications");
+        $this->assertEquals(self::$uids[0], $n[0]->mentioned_by->id, "mentioned_by should be the person who created the post in which the user was mentioned");
+        $this->assertEquals(self::$pids[0], $n[0]->post->id, "post should be the post in which the user was mentioned");
+        $this->assertEquals("mentioned", $n[0]->type, "the notification should have a type attribute equal to 'mentioned'");
         $this->assertObjectHasAttribute('date', $n[0], "the mentioned notification should have a date attribute");
         $this->assertObjectHasAttribute('reading_date', $n[0]);
 
@@ -85,9 +85,9 @@ class NotificationTest extends TestCase
     {
         User\follow(self::$uids[0], self::$uids[1]);
         $n = Notification\get_followed_notifications(self::$uids[1]);
-        $this->assertEquals(count($n), 1, "get_followed_notifications should return an array of followed notifications");
-        $this->assertEquals($n[0]->user->id, self::$uids[0], "user should be the person who followed the user");
-        $this->assertEquals($n[0]->type, "followed", "the followed notification should have a type attribute equal to 'followed'");
+        $this->assertEquals(1, count($n), "get_followed_notifications should return an array of followed notifications");
+        $this->assertEquals(self::$uids[0], $n[0]->user->id, "user should be the person who followed the user");
+        $this->assertEquals("followed", $n[0]->type, "the followed notification should have a type attribute equal to 'followed'");
         $this->assertObjectHasAttribute('date', $n[0], "the followed notification should have a date attribute");
 
         $this->assertNull($n[0]->reading_date, "reading_date should be equal to null if the notification hasn't been seen");
@@ -112,7 +112,7 @@ class NotificationTest extends TestCase
         Post\like(self::$uids[0], self::$pids[1]);
         
         $n = Notification\list_all_notifications(self::$uids[1]);
-        $this->assertEquals(count($n), 3);
+        $this->assertEquals(3, count($n), "list_all_notifications should be able to get every notification types");
         $this->assertEquals("mentioned", $n[2]->type, "list_all notifications should be able to sort notifications by dates (with datetime objects)");
         $this->assertEquals("followed", $n[1]->type, "list_all notifications should be able to sort notifications by dates (with datetime objects)");
         $this->assertEquals("liked", $n[0]->type, "list_all notifications should be able to sort notifications by dates (with datetime objects)");
