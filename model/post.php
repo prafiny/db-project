@@ -130,17 +130,16 @@ function destroy($id) {
  * @return an array of find objects
  */
 function search($string) {
-    return [get(1)];
+    return [];
 }
 
 /**
  * List posts
  * @param date_sorted the type of sorting on date (false if no sorting asked), "DESC" or "ASC" otherwise
  * @return an array of the objects of each post
- * @warning this function does not return the passwords
  */
 function list_all($date_sorted=false) {
-    return [get(1),get(1),get(1),get(1),get(1),get(1)];
+    return [];
 }
 
 /**
@@ -150,7 +149,7 @@ function list_all($date_sorted=false) {
  * @return the list of posts objects
  */
 function list_user_posts($id, $date_sorted="DESC") {
-    return [get(1)];
+    return [];
 }
 
 /**
@@ -159,7 +158,7 @@ function list_user_posts($id, $date_sorted="DESC") {
  * @return the users objects who liked the post
  */
 function get_likes($pid) {
-    return [\Model\User\get(2)];
+    return [];
 }
 
 /**
@@ -168,7 +167,7 @@ function get_likes($pid) {
  * @return the posts objects which are a response to the actual post
  */
 function get_responses($pid) {
-    return [get(2)];
+    return [];
 }
 
 /**
