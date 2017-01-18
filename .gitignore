@@ -8,4 +8,4 @@ config/*
 *.out
 *.synctex.gz
 *.toc
-
+www/images/*.*
