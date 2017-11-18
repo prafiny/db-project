@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", run: "always", inline: <<SCRIPT
 cd /vagrant/
-EXPORT inside_vagrant=true
+EXPORT local_database=true
 bash scripts/update.sh
 bash scripts/populate.sh --env=app
 SCRIPT

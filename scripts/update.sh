@@ -25,7 +25,7 @@ if [ $# -eq 0 ]; then
     echo "--------"
     echo ""
     rm -r -f bin
-    bash db-project-master/update.sh --new-version
+    bash db-project-master/scripts/update.sh --new-version
 else
     for i in "${files[@]}"
     do
