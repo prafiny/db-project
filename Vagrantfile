@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "prafiny/db-project"
 
-  config.vm.provision "shell", inline: <<SCRIPT
+  config.vm.provision "shell", run: "always", inline: <<SCRIPT
 cd /vagrant/
 bash update_vagrant.sh
 SCRIPT
