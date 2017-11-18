@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-files=(autoload.php composer.json composer-setup.php controller instructions lib README.md tests update.sh view www model)
+files=(autoload.php composer.json controller instructions lib README.md tests view www model scripts)
 
 download() {
 if hash wget 2>/dev/null; then

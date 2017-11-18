@@ -16,7 +16,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", run: "always", inline: <<SCRIPT
 cd /vagrant/
-bash update_vagrant.sh
+EXPORT inside_vagrant=true
+bash scripts/update.sh
+bash scripts/populate.sh --env=app
 SCRIPT
 
   # Disable automatic box update checking. If you disable this, then
