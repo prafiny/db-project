@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
 cd /vagrant/
 EXPORT local_database=true
 bash scripts/update.sh
-bash scripts/populate.sh --env=app
+bash scripts/populate_db.sh --env=app
 SCRIPT
 
   # Disable automatic box update checking. If you disable this, then
