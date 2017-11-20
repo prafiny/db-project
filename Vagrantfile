@@ -14,12 +14,12 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "prafiny/db-project"
 
-  config.vm.provision "shell", run: "always", inline: <<SCRIPT
+  config.vm.provision "shell", run: "always", inline: <<SHELL
 cd /vagrant/
 EXPORT local_database=true
 bash scripts/update.sh
 bash scripts/populate_db.sh --env=app
-SCRIPT
+SHELL
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
