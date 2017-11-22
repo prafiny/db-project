@@ -63,7 +63,7 @@ SHELL
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
     vb.customize [ "modifyvm", :id, "--uart1", "0x3F8", "4" ]
-    vb.customize [ "modifyvm", :id, "--uartmode1", "file", File.join(Dir.pwd, "ubuntu-xenial-16.04-cloudimg-console.log") ]
+    vb.customize [ "modifyvm", :id, "--uartmode1", "file", File.join(Dir.pwd, "db-project-cloudimg-console.log") ]
   #
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
