@@ -10,10 +10,11 @@ fi
 schemas_file="sql/schemas.sql"
 entries_file="sql/entries.sql"
 
-scripts/get_yaml.py "config/db.yaml" "$1"
+python3 scripts/get_yaml.py "config/db.yaml" "$1"
 mysql_cmd="-h$server -u$username -p$password"
 
 if [ "$local_database" = "true" ]; then
+	bash scripts/purge_db.sh "$1"	
 	mysqladmin $mysql_cmd create "$db"
 	sqlcode="$(cat "$schemas_file" | awk '!/^(use|create database|drop database|USE|CREATE DATABASE|DROP DATABASE)/')"
 	echo $sqlcode | mysql $mysql_cmd

@@ -4,6 +4,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 cd "$SCRIPTPATH/../"
 
 if [ "$local_database" = "true" ]; then
+	bash scripts/populate_db.sh "test"
 	for i in "tests/"*; do
 		phpunit --bootstrap "autoload.php" "$i"
 	done

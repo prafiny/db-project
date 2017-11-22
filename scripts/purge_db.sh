@@ -7,7 +7,7 @@ if [ $# -lt 1 ]; then
     exit
 fi
 
-scripts/get_yaml.py "config/db.yaml" "$1"
+python3 scripts/get_yaml.py "config/db.yaml" "$1"
 
 mysqladmin -h"$server" -u"$username" -p"$password" drop "$db"
 
