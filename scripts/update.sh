@@ -14,11 +14,12 @@ if [ $# -eq 0 ]; then
     echo "Downloading master.zip"
     echo "----------------------"
     echo ""
+    exit
     download http://github.com/prafiny/db-project/archive/master.tar.gz master.tar.gz
     RESUlT="$?"
-    if [ ! "$RESULT" = "0" ]; then
+    if [ $RESULT ]; then
         >&2 echo "The script couldn't be updated."
-	exit $?
+	exit $RESULT
     fi
     tar xvf master.tar.gz
     rm master.tar.gz

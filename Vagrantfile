@@ -16,14 +16,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", run: "always", inline: <<SHELL
 cd /vagrant/
-EXPORT local_database=true
+export local_database=true
 bash scripts/update.sh
 bash scripts/populate_db.sh app
 SHELL
 
   config.ssh.username = "ubuntu"
   config.ssh.password = "3d7d18ebe09a49ff99028120"
-
+  config.ssh.insert_key = true
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.

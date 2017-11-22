@@ -7,7 +7,7 @@ if [ $# -lt 1 ]; then
     exit
 fi
 
-python3 scripts/get_yaml.py "config/db.yaml" "$1"
+$(python3 scripts/get_yaml.py "config/db.yaml" "$1")
 
-mysqladmin -h"$server" -u"$username" -p"$password" drop "$db"
+echo "drop database if exists $db" | mysql -h"$server" -u"$username" -p"$password"
 
