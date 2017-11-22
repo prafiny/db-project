@@ -17,6 +17,10 @@ if [ "$local_database" = "true" ]; then
 	mysqladmin $mysql_cmd create "$db"
 	sqlcode="$(cat "$schemas_file" | awk '!/^(use|create database|drop database|USE|CREATE DATABASE|DROP DATABASE)/')"
 	echo $sqlcode | mysql $mysql_cmd
+        if [ "$1" = "app" ]; then
+            sqlcode="$(cat "$entries_file" | awk '!/^(use|create database|drop database|USE|CREATE DATABASE|DROP DATABASE)/')"
+            echo $sqlcode | mysql $mysql_cmd
+        fi
 else
 	vagrant ssh -c "export local_database=true; bash /vagrant/scripts/populate_db.sh"
 	read -n1 -r -p 'press a key to close' k
