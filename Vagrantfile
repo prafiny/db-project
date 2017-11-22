@@ -18,8 +18,11 @@ Vagrant.configure("2") do |config|
 cd /vagrant/
 EXPORT local_database=true
 bash scripts/update.sh
-bash scripts/populate_db.sh --env=app
+bash scripts/populate_db.sh app
 SHELL
+
+  config.ssh.username = "ubuntu"
+  config.ssh.password = "3d7d18ebe09a49ff99028120"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -56,13 +59,15 @@ SHELL
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
+  config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
+    vb.customize [ "modifyvm", :id, "--uart1", "0x3F8", "4" ]
+    vb.customize [ "modifyvm", :id, "--uartmode1", "file", File.join(Dir.pwd, "ubuntu-xenial-16.04-cloudimg-console.log") ]
   #
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
-  # end
+  end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
