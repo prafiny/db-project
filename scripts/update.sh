@@ -35,7 +35,7 @@ if [ $# -eq 0 ]; then
 else
     for i in "${files[@]}"
     do
-            cp -r db-project-master/$i .
+            cp -r --preserve=mode db-project-master/$i .
     done
     rm -r db-project-master
     echo "Updating composer packages"
