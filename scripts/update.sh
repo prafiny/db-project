@@ -14,7 +14,6 @@ if [ $# -eq 0 ]; then
     echo "Downloading master.zip"
     echo "----------------------"
     echo ""
-    exit
     download http://github.com/prafiny/db-project/archive/master.tar.gz master.tar.gz
     RESUlT="$?"
     if [ $RESULT ]; then
