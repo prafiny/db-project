@@ -1,4 +1,4 @@
-SET mypath=%~dp0%..\
+SET mypath=%~dp0%..\..\
 cd %mypath% 
 vagrant up
 pause
