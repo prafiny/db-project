@@ -15,7 +15,6 @@ Vagrant.configure("2") do |config|
   config.vm.box = "prafiny/db-project"
   config.vm.provision "shell", run: "always", inline: <<SHELL
 cd /vagrant/
-export local_database=true
 bash scripts/update.sh
 bash scripts/snapshot_db.sh last_is_file
 bash scripts/populate_db.sh app

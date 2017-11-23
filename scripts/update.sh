@@ -1,10 +1,14 @@
 #!/bin/bash
 set -e
-files=(autoload.php composer.json controller instructions lib README.md tests view www model scripts)
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 source "$SCRIPTPATH/helpers/macros.sh"
 check_term
 
+if [ "$local_database" != "true" ]; then
+	vagrant ssh -c "bash /vagrant/scripts/update.sh"
+fi
+
+files=(autoload.php composer.json controller instructions lib README.md tests view www model scripts)
 REPO="https://github.com/prafiny/db-project.git"
 TMP_REPO=~/db-project
 
