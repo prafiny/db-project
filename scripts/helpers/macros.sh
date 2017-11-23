@@ -1,7 +1,9 @@
 #!/bin/bash
 
 check_term() {
-if [ ! -t 0 ]; then
-	xterm -hold -e "bash $0"
+if [ "$NO_TERM" != "true" ];
+	if [ ! -t 0 ]; then
+		xterm -hold -e "bash $0"
+	fi
 fi
 }
