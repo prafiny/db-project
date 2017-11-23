@@ -35,3 +35,46 @@ function extract_mentions($text) {
     );
 }
 
+/**
+ * Parse a message text for hashtags (includes links)
+ * @param text the message
+ * @return the parsed message
+ */
+function parse_hashtags($text) {
+    return implode(
+        " ",    
+        array_map(
+            function($el) {
+                if($el !== "" && $el[0] == "#") {
+                    $n = substr($el, 1);
+                    return '<a href="/hashtag.php?name='.$n.'">'.$el.'</a>';
+                }
+                return $el;
+            },
+            explode(" ", $text)
+        )
+    );
+}
+
+
+/**
+ * Parse a message text for mentions (includes links)
+ * @param text the message
+ * @return the parsed message
+ */
+function parse_mentions($text) {
+    return implode(
+        " ",    
+        array_map(
+            function($el) {
+                if($el !== "" && $el[0] == "@") {
+                    $n = substr($el, 1);
+                    return '<a href="/user.php?username='.$n.'">'.$el.'</a>';
+                }
+                return $el;
+            },
+            explode(" ", $text)
+        )
+    );
+}
+

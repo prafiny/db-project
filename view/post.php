@@ -22,7 +22,12 @@ main_template(get_defined_vars(), function($vars) {
                                     <?php echo $post->author->name; ?> (<?php echo htmlspecialchars($post->author->username); ?>)
                                 </a>
                             </div>
-                            <div class="text"><?php echo htmlspecialchars($post->text); ?></div>
+                            <div class="text"><?php
+    $p = htmlspecialchars($post->text);
+    $p = \Model\Post\parse_mentions($p);
+    $p = \Model\Post\parse_hashtags($p);
+    echo $p;
+?></div>
                         </div>
                         <div class="pure-g post-actions">
                             <?php
