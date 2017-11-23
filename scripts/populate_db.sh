@@ -1,6 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 cd "$SCRIPTPATH/../"
+source scripts/helpers/macros.sh
+check_term
 
 if [ $# -lt 1 ]; then
     echo "USAGE : ./purge_db.sh env"
@@ -22,7 +24,5 @@ if [ "$local_database" = "true" ]; then
 	mysql $mysql_cmd $db < buf.sql
 	rm buf.sql
 else
-	vagrant ssh -c "export local_database=true; bash /vagrant/scripts/populate_db.sh"
-	read -n1 -r -p 'press a key to close' k
+	vagrant ssh -c "bash /vagrant/scripts/populate_db.sh"
 fi
-

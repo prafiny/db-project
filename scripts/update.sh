@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 files=(autoload.php composer.json controller instructions lib README.md tests view www model scripts)
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source "$SCRIPTPATH/helpers/macros.sh"
+check_term
+
+REPO="https://github.com/prafiny/db-project.git"
+TMP_REPO=~/db-project
 
 download() {
 if hash wget 2>/dev/null; then
@@ -10,18 +16,25 @@ else
 fi
 }
 
+clone_or_pull() {
+	if [ -f "$2" ]; then
+		git -C "$2" pull
+	else
+		git clone "$1" "$2"
+	fi
+}
+
 if [ $# -eq 0 ]; then
-    echo "Downloading master.zip"
+    echo "Downloading master.tar.gz"
     echo "----------------------"
     echo ""
-    download http://github.com/prafiny/db-project/archive/master.tar.gz master.tar.gz
+    clone_or_pull "$REPO" "$TMP_REPO"
     RESUlT="$?"
     if [ $RESULT ]; then
         >&2 echo "The script couldn't be updated."
 	exit $RESULT
     fi
-    tar xvf master.tar.gz
-    rm master.tar.gz
+    cd "$SCRIPTPATH/../"
     for i in "${files[@]}"
     do
             rm -r -f $i
@@ -30,13 +43,12 @@ if [ $# -eq 0 ]; then
     echo "--------"
     echo ""
     rm -r -f bin
-    bash db-project-master/scripts/update.sh --new-version
+    bash $TMP_REPO/scripts/update.sh --new-version
 else
     for i in "${files[@]}"
     do
-            cp -r --preserve=mode db-project-master/$i .
+            cp -r --preserve=mode "$SCRIPTPATH/../$i" .
     done
-    rm -r db-project-master
     echo "Updating composer packages"
     echo "-----------------"
     echo ""

@@ -1,6 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 cd "$SCRIPTPATH/../"
+source scripts/helpers/macros.sh
+check_term
 
 schemas_file="sql/schemas"
 entries_file="sql/entries"
@@ -41,6 +43,5 @@ if [ "$local_database" = "true" ]; then
 
 	mysqldump $mysql_cmd --no-create-info --no-create-db $db > $sav_entries
 else
-	vagrant ssh -c "export local_database=true; bash /vagrant/scripts/snapshot_db.sh"
-	read -n1 -r -p 'press a key to close' k
+	vagrant ssh -c "bash /vagrant/scripts/snapshot_db.sh"
 fi

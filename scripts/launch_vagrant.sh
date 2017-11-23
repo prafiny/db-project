@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-
 cd "$SCRIPTPATH/../"
-vagrant up
+source scripts/helpers/macros.sh
+check_term
 
-read -n1 -r -p 'press a key to close' k
+vagrant up
