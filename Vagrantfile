@@ -17,10 +17,7 @@ Vagrant.configure("2") do |config|
 cd /vagrant/
 export LOCAL_DBPROJECT="true"
 export NO_TERM="true"
-test -t 0 && echo shell || echo no shell
-bash scripts/update.sh
-bash scripts/snapshot_db.sh last_is_file
-bash scripts/populate_db.sh app
+su ubuntu -c "bash scripts/update.sh; bash scripts/snapshot_db.sh last_is_file; bash scripts/populate_db.sh app"
 SHELL
   config.ssh.username = "ubuntu"
   #config.ssh.password = "3d7d18ebe09a49ff99028120"
