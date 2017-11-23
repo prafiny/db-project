@@ -24,3 +24,24 @@ function list_all_notifications($uid) {
     return $ary;
 }
 
+
+/**
+ * Mark a notification as read (with date of reading)
+ * @param uid the user to whom modify the notifications
+ * @param notification the notification object to mark as seen
+ * @return true if everything went ok, false else
+ */
+function notification_seen($uid, $notification) {
+    switch($notification->type) {
+        case "liked":
+            return liked_notification_seen($notification->post->id, $notification->liked_by->id);
+        break;
+        case "mentioned":
+            return mentioned_notification_seen($uid, $notification->post->id);
+        break;
+        case "followed":
+            return followed_notification_seen($uid, $notification->user->id);
+        break;
+    }
+    return false;
+}
