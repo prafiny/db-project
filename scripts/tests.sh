@@ -6,6 +6,8 @@ cd "$SCRIPTPATH/../"
 if [ "$local_database" = "true" ]; then
 	bash scripts/populate_db.sh "test"
 	for i in "tests/"*; do
+		echo $i
+		echo -------
 		phpunit --bootstrap "autoload.php" "$i"
 	done
 else
