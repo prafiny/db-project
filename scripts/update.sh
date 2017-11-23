@@ -10,7 +10,7 @@ fi
 
 files=(autoload.php composer.json controller instructions lib README.md tests view www model scripts)
 REPO="https://github.com/prafiny/db-project.git"
-TMP_REPO=~/db-project
+TMP_REPO=/home/ubuntu/db-project
 
 download() {
 if hash wget 2>/dev/null; then
@@ -35,8 +35,8 @@ clone_or_pull() {
 }
 
 if [ $# -eq 0 ]; then
-    echo "Downloading master.tar.gz"
-    echo "----------------------"
+    echo "Pulling from repo"
+    echo "-----------------"
     echo ""
     clone_or_pull "$REPO" "$TMP_REPO"
     RESUlT="$?"
@@ -60,7 +60,7 @@ else
             cp -r --preserve=mode "$SCRIPTPATH/../$i" .
     done
     echo "Updating composer packages"
-    echo "-----------------"
+    echo "--------------------------"
     echo ""
     composer update
 fi
