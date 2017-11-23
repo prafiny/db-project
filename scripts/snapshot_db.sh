@@ -43,5 +43,5 @@ if [ "$LOCAL_DBPROJECT" = "true" ]; then
 
 	mysqldump $mysql_cmd --no-create-info --no-create-db $db > $sav_entries
 else
-	vagrant ssh -c "bash /vagrant/scripts/snapshot_db.sh"
+	vagrant ssh -c "export LOCAL_DBPROJECT=true; bash /vagrant/scripts/snapshot_db.sh"
 fi
