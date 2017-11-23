@@ -1,0 +1,36 @@
+#!/bin/sh
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+cd "$SCRIPTPATH/../"
+
+schemas_file="sql/schemas"
+entries_file="sql/entries"
+
+handle_duplicate() {
+	name="$1"
+	if [[ -e $name.sql ]] ; then
+	    i=0
+	    while [[ -e $name.$i.sql ]] ; do
+		let i++
+	    done
+	    name=$1.$i.sql
+	fi
+	echo $name
+}
+datetime="$(date +"%Y-%m-%d_%H-%M-%S")"
+
+$(python3 scripts/get_yaml.py "config/db.yaml" "app")
+mysql_cmd="-h$server -u$username -p$password"
+if [ "$local_database" = "true" ]; then
+	if [ -e "$schemas_file.sql" ]; then
+		mv "$schemas_file.sql" "sql/backup/$datetime.schemas.sql"
+	fi
+	mysqldump $mysql_cmd --no-data --no-create-db $db > $schemas_file.sql
+
+	if [ -e "$entries_file.sql" ]; then
+		mv "$entries_file.sql" "sql/backup/$datetime.entries.sql"
+	fi	
+	mysqldump $mysql_cmd --no-create-info --no-create-db $db > $entries_file.sql
+else
+	vagrant ssh -c "export local_database=true; bash /vagrant/scripts/snapshot_db.sh"
+	read -n1 -r -p 'press a key to close' k
+fi
