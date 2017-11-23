@@ -21,15 +21,22 @@ datetime="$(date +"%Y-%m-%d_%H-%M-%S")"
 $(python3 scripts/get_yaml.py "config/db.yaml" "app")
 mysql_cmd="-h$server -u$username -p$password"
 if [ "$local_database" = "true" ]; then
-	if [ -e "$schemas_file.sql" ]; then
-		mv "$schemas_file.sql" "sql/backup/$datetime.schemas.sql"
+	if [ "$1" = "save_mysql" ]; then
+		sav_schemas="sql/backup/$datetime.schemas.sql"
+		sav_entries="sql/backup/$datetime.entries.sql"
+	else
+		if [ -e "$schemas_file.sql" ]; then
+			mv "$schemas_file.sql" "sql/backup/$datetime.schemas.sql"
+			sav_schemas="$schemas_file.sql"
+		fi
+		if [ -e "$entries_file.sql" ]; then
+			mv "$entries_file.sql" "sql/backup/$datetime.entries.sql"
+			sav_entries="$entries_file.sql"
+		fi
 	fi
-	mysqldump $mysql_cmd --no-data --no-create-db $db > $schemas_file.sql
+	mysqldump $mysql_cmd --no-data --no-create-db $db > $sav_schemas
 
-	if [ -e "$entries_file.sql" ]; then
-		mv "$entries_file.sql" "sql/backup/$datetime.entries.sql"
-	fi	
-	mysqldump $mysql_cmd --no-create-info --no-create-db $db > $entries_file.sql
+	mysqldump $mysql_cmd --no-create-info --no-create-db $db > $sav_entries
 else
 	vagrant ssh -c "export local_database=true; bash /vagrant/scripts/snapshot_db.sh"
 	read -n1 -r -p 'press a key to close' k
