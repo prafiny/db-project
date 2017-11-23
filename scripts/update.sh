@@ -4,7 +4,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 source "$SCRIPTPATH/helpers/macros.sh"
 check_term
 
-if [ "$local_database" != "true" ]; then
+if [ "$LOCAL_DBPROJECT" != "true" ]; then
 	vagrant ssh -c "bash /vagrant/scripts/update.sh"
 fi
 

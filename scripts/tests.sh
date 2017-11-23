@@ -4,7 +4,7 @@ cd "$SCRIPTPATH/../"
 source scripts/helpers/macros.sh
 check_term
 
-if [ "$local_database" = "true" ]; then
+if [ "$LOCAL_DBPROJECT" = "true" ]; then
 	bash scripts/populate_db.sh "test"
 	for i in "tests/"*; do
 		echo $i
