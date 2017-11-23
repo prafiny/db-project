@@ -11,7 +11,7 @@ function require_wildcard($w) {
 
 require_once("/home/ubuntu/vendor/autoload.php");
 require_once("lib/db.php");
-require_wildcard("model/*.php");
 require_wildcard("model_student/*.php");
+require_wildcard("model/*.php");
 
 Db::connect(true);
