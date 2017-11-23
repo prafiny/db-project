@@ -10,3 +10,6 @@ vendor
 www/images/*.*
 .vagrant
 sql/backup/*.sql
+*.nav
+*.snm
+*.vrb

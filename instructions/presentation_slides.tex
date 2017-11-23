@@ -140,19 +140,13 @@
 \begin{itemize}
 \item 6 practical works (12h)
 \item Work in pairs
-\item Code to give back at the end (the database schema + the \texttt{model/} files)
+\item Code to give back at the end (the database schema in \texttt{db/} + the \texttt{model/} files)
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Project structure}
 \center
 \includegraphics[scale=0.3]{images/mvc-rails.png}
-\end{frame}
-
-\begin{frame}{Code}
-\center
-    \url{http://github.com/prafiny/db-project}
-    \includegraphics[scale=0.2]{images/project.png}  
 \end{frame}
 
 \section{PHP}
@@ -356,7 +350,41 @@ try {
     \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]{\texttt{DateTime} objects}
+    \begin{itemize}
+	\item Containing time and date information
+	\item Creating \texttt{DateTime} object from SQL Datetime field :
+	\begin{lstlisting}
+		$d = new \Datetime($sql_datetimefield);
+	\end{lstlisting}
+	\item Saving \texttt{DateTime} object to database :
+	\begin{lstlisting}
+		$sql = "INSERT INTO report(`txt`, `date`) VALUES(:txt, :date)";
+		$sth = $dbh->prepare($sql);
+		$sth->execute(array(
+				':txt' => $txt,
+				':date' => $d->format("Y-m-d H:i:s")
+			)
+		);
+	\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Resources}
+\begin{itemize}
+	\item OpenClassrooms \\ \url{https://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql}
+	\item TutsPlus \\ \url{https://code.tutsplus.com/courses/php-fundamentals}
+	\item The PHP manual \\ \url{https://php.net/docs.php}
+\end{itemize}
+\end{frame}
+
 \section{Work to do}
+
+\begin{frame}{Code}
+\center
+\url{http://github.com/prafiny/db-project}
+\includegraphics[scale=0.2]{images/project.png}  
+\end{frame}
 
 \begin{frame}{Code}
     \begin{center}
@@ -368,7 +396,8 @@ try {
 \item Application can be run in browser (see instructions)
 \item Unit tests can be run to check the functions (see instructions)
 \item Instructions (in the folder \texttt{instructions/})
-\item The goal is to fill out the models (files in folder \texttt{model/})
+\item DB schemas in \texttt{sql/schemas.sql} and entries in \texttt{sql/entries.sql}
+\item The goal is to fill out the models (files in folder \texttt{model\_student/})
 \begin{enumerate}
 \item Read 0setup.pdf for environment installation
 \item Read 1user.pdf for first work
