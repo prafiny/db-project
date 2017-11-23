@@ -17,8 +17,14 @@ fi
 }
 
 clone_or_pull() {
-	if [ -f "$2" ]; then
-		git -C "$2" pull
+	if [ -e "$2" ]; then
+		git -C "$2" fetch origin
+		reslog=$(git -C "$2" log HEAD..origin/master --oneline)
+		if [[ "${reslog}" != "" ]] ; then
+			git -C "$2" merge origin/master
+		else
+			exit
+		fi
 	else
 		git clone "$1" "$2"
 	fi
