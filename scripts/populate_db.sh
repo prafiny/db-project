@@ -24,5 +24,5 @@ if [ "$LOCAL_DBPROJECT" = "true" ]; then
 	mysql $mysql_cmd $db < buf.sql
 	rm buf.sql
 else
-	vagrant ssh -c "bash /vagrant/scripts/populate_db.sh"
+	vagrant ssh -c "export LOCAL_DBPROJECT=true; bash /vagrant/scripts/populate_db.sh"
 fi

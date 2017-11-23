@@ -12,5 +12,5 @@ if [ "$LOCAL_DBPROJECT" = "true" ]; then
 		phpunit --bootstrap "autoload.php" "$i"
 	done
 else
-	vagrant ssh -c "bash /vagrant/scripts/tests.sh"
+	vagrant ssh -c "export LOCAL_DBPROJECT=true; bash /vagrant/scripts/tests.sh"
 fi
