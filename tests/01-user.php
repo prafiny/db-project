@@ -37,14 +37,11 @@ class UserTest extends TestCase
     public function testModify($uid)
     {
         $user = User\get($uid);
-        $this->assertTrue(
-            User\modify(
-                $uid,
-                "user2",
-                "User 2",
-                "user2@mail.com"
-            ),
-            "User couldn't be modified"
+        User\modify(
+            $uid,
+            "user2",
+            "User 2",
+            "user2@mail.com"
         );
         $user = User\get($uid);
         $this->assertEquals("user2", $user->username, "modify should set the new username");
@@ -67,7 +64,7 @@ class UserTest extends TestCase
             "user1@mail.comlol",
             ""
         );
-        $this->assertTrue(User\destroy($duid), "destroy should return true if everything went fine");
+        User\destroy($duid);
         $this->assertNull(User\get($duid), "Deleted user should no more exist");
         return $uid;
     }    
@@ -77,11 +74,9 @@ class UserTest extends TestCase
      */
     public function testChangePassword($uid)
     {
-        $this->assertTrue(
-            User\change_password(
-                $uid,
-                "new password"
-            )
+        User\change_password(
+            $uid,
+            "new password"
         );
         $user = User\get($uid);
         $this->assertEquals($user, User\check_auth($user->username, "new password"), "Modify should set the new password properly");
@@ -153,7 +148,7 @@ class UserTest extends TestCase
      */
     public function testFollow($users)
     {
-        $this->assertTrue(User\follow($users[0]->id, $users[1]->id), "follow should return true if the following action has been performed");
+        User\follow($users[0]->id, $users[1]->id);
 
         $l = User\get_followers($users[1]->id);
         $this->assertEquals(1, count($l), "get_followers should return every follower users");
@@ -163,7 +158,7 @@ class UserTest extends TestCase
         $this->assertEquals(1, count($l), "get_followings should return every following users");
         $this->assertEquals($l[0], $users[1], "get_followings should return user objects");
 
-        $this->assertTrue(User\unfollow($users[0]->id, $users[1]->id));
+        User\unfollow($users[0]->id, $users[1]->id);
         $this->assertEmpty(User\get_followings($users[0]->id), "unfollow should make that a user is unfollowed");
         $this->assertEmpty(User\get_followers($users[1]->id));
         return $users;
