@@ -5,7 +5,7 @@ source "$SCRIPTPATH/helpers/macros.sh"
 check_term
 
 if [ "$LOCAL_DBPROJECT" != "true" ]; then
-	vagrant ssh -c "bash /vagrant/scripts/update.sh"
+	vagrant ssh -c "export LOCAL_DBPROJECT=true; bash /vagrant/scripts/update.sh"
 fi
 
 files=(autoload.php composer.json controller instructions lib README.md tests view www model scripts)

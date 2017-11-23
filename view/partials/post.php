@@ -17,7 +17,12 @@ function post($post, $html_classes="") {
                                 </a>
                             </div>
                             <a class="link-post" href="post.php?id=<?php echo htmlspecialchars($post->id); ?>">
-                                <div class="text"><?php echo htmlspecialchars($post->text); ?></div>
+                                <div class="text"><?php
+    $p = htmlspecialchars($post->text);
+    $p = \Model\Post\parse_mentions($p);
+    $p = \Model\Post\parse_hashtags($p);
+    echo $p;
+?></div>
                             </a>
                         </div>
 
