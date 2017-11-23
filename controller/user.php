@@ -46,19 +46,13 @@ function follow($username) {
             header("Location: index.php");
             return;
         }
-        if(\Model\User\follow($user->id, $to_follow->id)) {
-            \Session\set_success("You are following " . $to_follow->username . ".");
-            header("Location: user.php?username=".$to_follow->username);
-        }
-        else {
-            \Session\set_error("An error occured while trying to follow ".$to_follow->username);
-            header("Location: user.php?username=".$to_follow->username);
-        }
+        \Model\User\follow($user->id, $to_follow->id);
+        \Session\set_success("You are following " . $to_follow->username . ".");
+        header("Location: user.php?username=".$to_follow->username);
     }
     catch(\Exception $e) {
         \Session\set_error("An error occured :".$e->getMessage());
         header("Location: user.php?username=".$to_follow->username);
-
     }
 }
 
@@ -75,14 +69,9 @@ function unfollow($username) {
             header("Location: index.php");
             return;
         }
-        if(\Model\User\unfollow($user->id, $to_unfollow->id)) {
-            \Session\set_success("You unfollowed " . $to_unfollow->username . ".");
-            header("Location: user.php?username=".$to_unfollow->username);
-        }
-        else {
-            \Session\set_error("An error occured while trying to unfollow ".$to_unfollow->username);
-            header("Location: user.php?username=".$to_unfollow->username);
-        }
+        \Model\User\unfollow($user->id, $to_unfollow->id);
+        \Session\set_success("You unfollowed " . $to_unfollow->username . ".");
+        header("Location: user.php?username=".$to_unfollow->username);
     }
     catch(\Exception $e) {
         \Session\set_error("An error occured :".$e->getMessage());
@@ -234,14 +223,8 @@ function update_profile($form, $files) {
             return;
         }
         if ($password !== '') {
-            if(\Model\User\change_password($u->id, $password)) {
-                \Session\set_password(\Model\User\hash_password($password));
-            }
-            else {
-                \Session\set_error("There was an error during profile update : password couldn't be changed.");
-                header("Location: update_profile.php");
-                return;
-            }
+            \Model\User\change_password($u->id, $password);
+            \Session\set_password(\Model\User\hash_password($password));
         }
         if($files["avatar"]["error"] != \UPLOAD_ERR_NO_FILE) {
             if($files["avatar"]["error"] != \UPLOAD_ERR_OK) {
@@ -254,18 +237,10 @@ function update_profile($form, $files) {
                 header("Location: signup.php");
                 return;
             }
-            if(!\Model\User\change_avatar($u->id, $avatar)) {
-                \Session\set_error("There was an error during profile update : avatar couldn't be changed.");
-                header("Location: update_profile.php");
-                return;
-            }
+            \Model\User\change_avatar($u->id, $avatar);
         }
-        if(\Model\User\modify($u->id, $username, $name, $email)) {
-            \Session\set_success("Profile has been modified successfully");
-        }
-        else {
-            \Session\set_error("There was an error during profile update.");
-        }
+        \Model\User\modify($u->id, $username, $name, $email);
+        \Session\set_success("Profile has been modified successfully");
         header("Location: update_profile.php");
     }
     catch(\Exception $e) {

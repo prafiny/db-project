@@ -89,14 +89,9 @@ function destroy($id) {
             header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
             return;
         }
-        if(\Model\Post\destroy($id)) {
-            \Session\set_success("Your twirp has been deleted.");
-            header("Location: index.php");
-        }
-        else {
-            \Session\set_error("An error occured");
-            header("Location: post.php?id=".$id);        
-        }
+        \Model\Post\destroy($id);
+        \Session\set_success("Your twirp has been deleted.");
+        header("Location: index.php");
     }
     catch(\Exception $e) {
         \Session\set_error("An error occured :".$e->getMessage());
@@ -116,14 +111,9 @@ function like($id) {
             header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
             return;
         }
-        if(\Model\Post\like($user->id, $id)) {
-            \Session\set_success("Your like was counted.");
-            header("Location: post.php?id=".$id);
-        }
-        else {
-            \Session\set_error("An error occured");
-            header("Location: post.php?id=".$id);        
-        }
+        \Model\Post\like($user->id, $id);
+        \Session\set_success("Your like was counted.");
+        header("Location: post.php?id=".$id);
     }
     catch(\Exception $e) {
         \Session\set_error("An error occured :".$e->getMessage());
@@ -143,14 +133,9 @@ function unlike($id) {
             header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
             return;
         }
-        if(\Model\Post\unlike($user->id, $id)) {
-            \Session\set_success("Your like was removed.");
-            header("Location: post.php?id=".$id);
-        }
-        else {
-            \Session\set_error("An error occured.");
-            header("Location: post.php?id=".$id);        
-        }
+        \Model\Post\unlike($user->id, $id);
+        \Session\set_success("Your like was removed.");
+        header("Location: post.php?id=".$id);
     }
     catch(\Exception $e) {
         \Session\set_error("An error occured :".$e->getMessage());
