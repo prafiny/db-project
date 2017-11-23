@@ -8,3 +8,4 @@ vendor
 *.synctex.gz
 *.toc
 www/images/*.*
+.vagrant
