@@ -1,10 +1,9 @@
 #!/bin/bash
-set -e
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 source "$SCRIPTPATH/helpers/macros.sh"
 check_term
 
-if [ ! $LOCAL_DBPROJECT = true ]; then
+if [[ ! -v LOCAL_DBPROJECT ]]; then
 	vagrant ssh -c "export LOCAL_DBPROJECT=true; bash /vagrant/scripts/update.sh"
 fi
 

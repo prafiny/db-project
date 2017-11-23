@@ -22,7 +22,7 @@ datetime="$(date +"%Y-%m-%d_%H-%M-%S")"
 
 $(python3 scripts/get_yaml.py "config/db.yaml" "app")
 mysql_cmd="-h$server -u$username -p$password"
-if [ "$LOCAL_DBPROJECT" = "true" ]; then
+if [[ -v LOCAL_DBPROJECT ]]; then
 	if [ "$1" = "last_is_file" ]; then
 		if ! mysql $mysql_cmd -e "use $db"; then
 			exit
