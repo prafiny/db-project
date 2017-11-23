@@ -34,7 +34,7 @@ class HashtagTest extends TestCase
 
     public function testAttach()
     {
-        $this->assertTrue(Hashtag\attach(self::$pids[0], "hashtag0"));
+        Hashtag\attach(self::$pids[0], "hashtag0");
         $l = Hashtag\list_hashtags();
         $this->assertContains("hashtag0", $l, "list_hashtags should return every hashtags");
         $this->assertContains("hashtag1", $l, "list_hashtags should return every hashtags");

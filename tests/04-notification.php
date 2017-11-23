@@ -45,7 +45,7 @@ class NotificationTest extends TestCase
         $this->assertObjectHasAttribute('reading_date', $n[0], "the liked notification should have a reading_date attribute");
 
         $this->assertNull($n[0]->reading_date, "reading_date should be equal to null if the notification hasn't been seen");
-        $this->assertTrue(Notification\liked_notification_seen(self::$pids[1], self::$uids[0]), "liked_notification_seen should return true if everything went ok");
+        Notification\liked_notification_seen(self::$pids[1], self::$uids[0]);
         $n = Notification\get_liked_notifications(self::$uids[1]);
         $this->assertNotNull($n[0]->reading_date, "reading date from get_liked_notifications shouldn't be null if the notification has been seen");
         
@@ -69,7 +69,7 @@ class NotificationTest extends TestCase
         $this->assertObjectHasAttribute('reading_date', $n[0]);
 
         $this->assertNull($n[0]->reading_date, "reading_date should be equal to null if the notification hasn't been seen");
-        $this->assertTrue(Notification\mentioned_notification_seen(self::$uids[1], self::$pids[0]));
+        Notification\mentioned_notification_seen(self::$uids[1], self::$pids[0]);
         $n = Notification\get_mentioned_notifications(self::$uids[1]);
         $this->assertNotNull($n[0]->reading_date, "reading date from get_mentioned_notifications shouldn't be null if the notification has been seen");
 
@@ -91,7 +91,7 @@ class NotificationTest extends TestCase
         $this->assertObjectHasAttribute('date', $n[0], "the followed notification should have a date attribute");
 
         $this->assertNull($n[0]->reading_date, "reading_date should be equal to null if the notification hasn't been seen");
-        $this->assertTrue(Notification\followed_notification_seen(self::$uids[1], self::$uids[0]));
+        Notification\followed_notification_seen(self::$uids[1], self::$uids[0]);
         $n = Notification\get_followed_notifications(self::$uids[1]);
         $this->assertNotNull($n[0]->reading_date, "reading date from get_followed_notifications shouldn't be null if the notification has been seen");
         

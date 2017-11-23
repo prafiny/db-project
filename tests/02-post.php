@@ -60,7 +60,7 @@ class PostTest extends TestCase
     public function testDestroy()
     {
         $pid1 = Post\create(self::$users[0]->id, "this is a searchid1 test");
-        $this->assertTrue(Post\destroy($pid1), "deleting a post should return true");
+        Post\destroy($pid1);
         $this->assertNull(Post\get($pid1), "destroy should delete the right post and get should return null on it");
     }
 
@@ -123,12 +123,12 @@ class PostTest extends TestCase
     {
         $uid = self::$users[0]->id;
         $pid = Post\create($uid, "test like");
-        $this->assertTrue(Post\like(self::$users[1]->id, $pid), "like should return true if everything went fine");
+        Post\like(self::$users[1]->id, $pid);
         $post = Post\get_with_joins($pid);
         $this->assertObjectHasAttribute('likes', $post, "joined post object should have a likes attribute");
         $this->assertEquals(1, count($post->likes), "get_with_joins should return list of users that liked the post");
         $this->assertEquals($post->likes[0], self::$users[1], '$post->likes should be an array of user objects');
-        $this->assertTrue(Post\unlike(self::$users[1]->id, $pid));
+        Post\unlike(self::$users[1]->id, $pid);
         $post = Post\get_with_joins($pid);
         $this->assertEmpty($post->likes, "post likes list should be empty if no user liked the post");
     }
