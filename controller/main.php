@@ -1,22 +1,28 @@
 <?php
 namespace Controller\Main;
 function main() {
-    $user = \Session\get_user();
-    if($user) {
-        $posts = array();
-        $f = array_map(function($u){
+    try {
+        $user = \Session\get_user();
+        if($user) {
+            $posts = array();
+            $f = array_map(function($u){
             return $u->id;
-        }, \Model\User\get_followings($user->id));
-        $all_posts = \Model\Post\list_all("DESC");
-        foreach($all_posts as $p) {
+            }, \Model\User\get_followings($user->id));
+            $all_posts = \Model\Post\list_all("DESC");
+            foreach($all_posts as $p) {
             if($p->author->id == $user->id || in_array($p->author->id, $f)) {
                 $posts[] = $p;
             }
+            }
         }
+        else {
+            $posts = \Model\Post\list_all("DESC");
+        }
+        $popular_h = \Model\Hashtag\list_popular_hashtags(10);
     }
-    else {
-        $posts = \Model\Post\list_all("DESC");
+    catch(\Exception $e) {
+        echo "An error occured :".$e->getMessage();
+        exit();
     }
-    $popular_h = \Model\Hashtag\list_popular_hashtags(10);
     require "../view/timeline.php";
 }
