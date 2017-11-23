@@ -8,12 +8,13 @@ function require_wildcard($w) {
 }
 
 require "session.php";
-require "../vendor/autoload.php";
+require "/home/ubuntu/vendor/autoload.php";
 require "db.php";
 require "http.php";
 
 Db::connect();
 
 require_wildcard("../model/*.php");
+require_wildcard("../model_student/*.php");
 require_wildcard("../controller/*.php");
 require_wildcard("../view/partials/*.php");
