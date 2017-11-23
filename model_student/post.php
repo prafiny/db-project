@@ -63,47 +63,11 @@ function create($author_id, $text, $response_to=null) {
 }
 
 /**
- * Get the list of used hashtags in message
- * @param text the message
- * @return an array of hashtags
- */
-function extract_hashtags($text) {
-    return array_map(
-        function($el) { return substr($el, 1); },
-        array_filter(
-            explode(" ", $text),
-            function($c) {
-                return $c !== "" && $c[0] == "#";
-            }
-        )
-    );
-}
-
-/**
- * Get the list of mentioned users in message
- * @param text the message
- * @return an array of usernames
- */
-function extract_mentions($text) {
-    return array_map(
-        function($el) { return substr($el, 1); },
-        array_filter(
-            explode(" ", $text),
-            function($c) {
-                return $c !== "" && $c[0] == "@";
-            }
-        )
-    );
-}
-
-/**
  * Mention a user in a post
  * @param pid the post id
  * @param uid the user id to mention
- * @return true if everything went ok, false else
  */
 function mention_user($pid, $uid) {
-    return false;
 }
 
 /**
@@ -118,10 +82,8 @@ function get_mentioned($pid) {
 /**
  * Delete a post in db
  * @param id the id of the post to delete
- * @return true if the post has been correctly deleted, false else
  */
 function destroy($id) {
-    return false;
 }
 
 /**
@@ -184,19 +146,15 @@ function get_stats($pid) {
  * Like a post
  * @param uid the user's id to like the post
  * @param pid the post's id to be liked
- * @return true if the post has been liked, false else
  */
 function like($uid, $pid) {
-    return false;
 }
 
 /**
  * Unlike a post
  * @param uid the user's id to unlike the post
  * @param pid the post's id to be unliked
- * @return true if the post has been unliked, false else
  */
 function unlike($uid, $pid) {
-    return false;
 }
 

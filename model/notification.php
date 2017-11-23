@@ -29,7 +29,6 @@ function list_all_notifications($uid) {
  * Mark a notification as read (with date of reading)
  * @param uid the user to whom modify the notifications
  * @param notification the notification object to mark as seen
- * @return true if everything went ok, false else
  */
 function notification_seen($uid, $notification) {
     switch($notification->type) {
@@ -43,5 +42,4 @@ function notification_seen($uid, $notification) {
             return followed_notification_seen($uid, $notification->user->id);
         break;
     }
-    return false;
 }

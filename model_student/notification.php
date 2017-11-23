@@ -31,10 +31,8 @@ function get_liked_notifications($uid) {
  * Mark a like notification as read (with date of reading)
  * @param pid the post id that has been liked
  * @param uid the user id that has liked the post
- * @return true if everything went ok, false else
  */
 function liked_notification_seen($pid, $uid) {
-    return false;
 }
 
 /**
@@ -59,10 +57,8 @@ function get_mentioned_notifications($uid) {
  * Mark a mentioned notification as read (with date of reading)
  * @param uid the user that has been mentioned
  * @param pid the post where the user was mentioned
- * @return true if everything went ok, false else
  */
 function mentioned_notification_seen($uid, $pid) {
-    return false;
 }
 
 /**
@@ -85,30 +81,6 @@ function get_followed_notifications($uid) {
  * Mark a followed notification as read (with date of reading)
  * @param followed_id the user id which has been followed
  * @param follower_id the user id that is following
- * @return true if everything went ok, false else
  */
 function followed_notification_seen($followed_id, $follower_id) {
-    return false;
 }
-
-/**
- * Mark a notification as read (with date of reading)
- * @param uid the user to whom modify the notifications
- * @param notification the notification object to mark as seen
- * @return true if everything went ok, false else
- */
-function notification_seen($uid, $notification) {
-    switch($notification->type) {
-        case "liked":
-            return liked_notification_seen($notification->post->id, $notification->liked_by->id);
-        break;
-        case "mentioned":
-            return mentioned_notification_seen($uid, $notification->post->id);
-        break;
-        case "followed":
-            return followed_notification_seen($uid, $notification->user->id);
-        break;
-    }
-    return false;
-}
-

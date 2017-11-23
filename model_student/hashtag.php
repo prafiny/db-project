@@ -12,10 +12,8 @@ use \PDOException;
  * Attach a hashtag to a post
  * @param pid the post id to which attach the hashtag
  * @param hashtag_name the name of the hashtag to attach
- * @return true or false (if something went wrong)
  */
 function attach($pid, $hashtag_name) {
-    return false;
 }
 
 /**
