@@ -17,6 +17,7 @@ Vagrant.configure("2") do |config|
 cd /vagrant/
 export local_database=true
 bash scripts/update.sh
+bash scripts/snapshot_db.sh last_is_file
 bash scripts/populate_db.sh app
 SHELL
   config.ssh.username = "ubuntu"

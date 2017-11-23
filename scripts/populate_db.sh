@@ -17,7 +17,6 @@ if [ "$local_database" = "true" ]; then
         if [ "$1" = "app" ]; then
             cat "$entries_file" | awk '!/^(use|create database|drop database|USE|CREATE DATABASE|DROP DATABASE)/' >> buf.sql
         fi
-	bash scripts/snapshot_db.sh save_mysql
 	bash scripts/purge_db.sh "$1"	
 	mysqladmin $mysql_cmd create "$db"
 	mysql $mysql_cmd $db < buf.sql
