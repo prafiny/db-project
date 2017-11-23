@@ -1,6 +1,7 @@
-(
 SET mypath=%~dp0%..\..\
 cd %mypath% 
-vagrant up
+vagrant up --no-provision
+(
+vagrant provision
 pause
 )
