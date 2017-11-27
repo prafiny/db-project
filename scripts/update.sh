@@ -9,7 +9,7 @@ fi
 
 files=(autoload.php composer.json controller instructions lib README.md tests view www model scripts)
 REPO="https://github.com/prafiny/db-project.git"
-TMP_REPO=/home/ubuntu/db-project
+TMP_REPO=/home/ubuntu/.db-project
 
 download() {
 if hash wget 2>/dev/null; then
