@@ -52,7 +52,7 @@ if [ $# -eq 0 ]; then
     echo "--------"
     echo ""
     rm -r -f bin
-    bash $TMP_REPO/scripts/update.sh --new-version
+    LOCAL_DBPROJECT=true bash $TMP_REPO/scripts/update.sh --new-version
 else
     for i in "${files[@]}"
     do
