@@ -26,6 +26,9 @@ clone_or_pull() {
 		if [[ "${reslog}" != "" ]] ; then
 			git -C "$2" merge origin/master
 		else
+            echo
+            echo "Nothing to update."
+            echo
 			exit
 		fi
 	else
