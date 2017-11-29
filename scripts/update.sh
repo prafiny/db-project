@@ -3,8 +3,9 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 source "$SCRIPTPATH/helpers/macros.sh"
 check_term
 
-if [[ ! -v LOCAL_DBPROJECT ]]; then
+if [ -z "$LOCAL_DBPROJECT" ]; then
 	vagrant ssh -c "export LOCAL_DBPROJECT=true; bash /vagrant/scripts/update.sh"
+    exit
 fi
 
 files=(autoload.php composer.json controller instructions lib README.md tests view www model scripts)
