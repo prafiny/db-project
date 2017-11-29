@@ -28,8 +28,9 @@ clone_or_pull() {
 			git -C "$2" merge origin/master
 		else
             echo
-            echo "Nothing to update."
+            echo "Code uptodate, running composer update."
             echo
+            composer update
 			exit
 		fi
 	else
