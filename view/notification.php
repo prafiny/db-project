@@ -14,7 +14,7 @@ main_template(get_defined_vars(), function($vars) {
                             $new_class = $notification->reading_date ? "" : " notification-new";
                             switch($notification->type) {
                             case "liked":
-                                $avatar = empty($notification->liked_by->avatar) ? '/img/default.jpg' : $notification->liked_by->avatar;
+                                $avatar = empty($notification->liked_by->avatar) ? '/images/default.jpg' : $notification->liked_by->avatar;
 ?>
                     <div class="inner-block notification notification-like<?php echo $new_class; ?>">
                         <div class="notification-content"><?php echo htmlspecialchars($notification->liked_by->name); ?> liked a <a href="post.php?id=<?php echo htmlspecialchars($notification->post->id); ?>">twirp</a> you wrote</div>
@@ -26,7 +26,7 @@ main_template(get_defined_vars(), function($vars) {
                                     \View\Partials\Post\post($notification->post, "notification notification-mention" . $new_class);
                                 break;
                                 case "followed":
-                                    $avatar = empty($notification->user->avatar) ? '/img/default.jpg' : $notification->user->avatar;
+                                    $avatar = empty($notification->user->avatar) ? '/images/default.jpg' : $notification->user->avatar;
                                     ?>
                     <div class="inner-block notification notification-followed<?php echo $new_class; ?>">
                         <div class="notification-content"><?php echo htmlspecialchars($notification->user->name); ?> is following you</div>

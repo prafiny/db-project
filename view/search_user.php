@@ -21,7 +21,7 @@ main_template(get_defined_vars(), function($vars) {
                             <div class="user-avatar">
                                 <a href="user.php?username=<?php echo htmlspecialchars($user->username); ?>">
                                     <img class="email-avatar" src="<?php
-        $avatar = empty($user->avatar) ? '/img/default.jpg' : $user->avatar;
+        $avatar = empty($user->avatar) ? '/images/default.jpg' : $user->avatar;
         echo htmlspecialchars($avatar); 
                                     ?>" height="64" width="64">
 

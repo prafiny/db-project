@@ -13,7 +13,7 @@ main_template(get_defined_vars(), function($vars) {
                         <div class="post-avatar">
                             <a href="user.php?username=<?php echo htmlspecialchars($post->author->username); ?>">
                                 <img class="email-avatar" src="<?php
-    $avatar = empty($post->author->avatar) ? '/img/default.jpg' : $post->author->avatar;
+    $avatar = empty($post->author->avatar) ? '/images/default.jpg' : $post->author->avatar;
     echo htmlspecialchars($avatar); 
                                 ?>" height="64" width="64">
                             </a>
