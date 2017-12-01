@@ -6,7 +6,10 @@ function post($post, $html_classes="") {
                     <div class="post inner-block <?php echo $html_classes; ?>">
                         <div class="post-avatar">
                             <a href="user.php?username=<?php echo htmlspecialchars($post->author->username); ?>">
-                                <img class="email-avatar" src="<?php echo htmlspecialchars($post->author->avatar); ?>" height="64" width="64">
+                                <img class="email-avatar" src="<?php
+    $avatar = empty($post->author->avatar) ? '/img/default.jpg' : $post->author->avatar;
+    echo htmlspecialchars($avatar); 
+                                ?>" height="64" width="64">
                             </a>
                         </div>
 

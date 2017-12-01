@@ -7,7 +7,7 @@ function handle_avatar($filename, $tmpfilename, $username) {
     if(!in_array($ext,$allowed) ) {
         return null;
     }
-    $newname = 'images/'.$username.'.'.$ext;
+    $newname = 'images/'.$username.'.pic.'.$ext;
     move_uploaded_file($tmpfilename, $newname);
     return $newname;
 }

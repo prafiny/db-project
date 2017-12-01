@@ -7,7 +7,7 @@ vendor
 *.out
 *.synctex.gz
 *.toc
-www/images/*.*
+www/images/*.pic.*
 .vagrant
 sql/backup/*.sql
 *.nav
