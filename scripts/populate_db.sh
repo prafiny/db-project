@@ -4,7 +4,7 @@ cd "$SCRIPTPATH/../"
 source scripts/helpers/macros.sh
 check_term
 
-if [ $# -lt 1 ]; then
+if [ $# -lt 1 ] || [ -z "$1" ]; then
     env=app
 else
     env=$1

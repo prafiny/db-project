@@ -3,7 +3,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 cd "$SCRIPTPATH/../"
 source scripts/helpers/macros.sh
 
-if [ $# -lt 1 ]; then
+if [ $# -lt 1 ] || [ -z "$1" ]; then
     echo "USAGE : ./purge_db.sh env"
     exit
 fi

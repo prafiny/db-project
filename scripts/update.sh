@@ -38,7 +38,7 @@ clone_or_pull() {
 	fi
 }
 
-if [ $# -eq 0 ]; then
+if [ $# -eq 0 ] || [ "$1" != "--new-version" ]; then
     echo "Pulling from repo"
     echo "-----------------"
     echo ""
