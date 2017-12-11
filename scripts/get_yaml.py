@@ -5,7 +5,7 @@ import sys
 if len(sys.argv) < 2:
     print("USAGE : ./get_yaml.py FILE ENV")
 
-path, env = sys.argv[1:]
+path, env = sys.argv[1:3]
 
 with open(path, 'r') as f:
     try:
