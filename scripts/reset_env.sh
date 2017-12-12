@@ -7,6 +7,13 @@ if [ -z "$LOCAL_DBPROJECT" ]; then
 	vagrant ssh -c "export LOCAL_DBPROJECT=true; bash /vagrant/scripts/reset_env.sh"
     exit
 fi
+
+read -p "Are you sure ? All the data is going to be erased !!! Continue ? (y/N)" choice_cont
+case "$choice_cont" in 
+  y|Y ) echo Erasing;;
+  * ) echo "Exiting"; exit;;
+esac
+
 bash $SCRIPTPATH/purge_db.sh "app"
 bash $SCRIPTPATH/purge_db.sh "test"
 
