@@ -141,7 +141,7 @@ The function returns either the id of the newly inserted user. If there was a pr
 It doesn't check whether the username is already taken or not.
 
 \subsubsection{\texttt{get(\$id)}}
-This function gets a post with a given id (the one given in parameter). Returns \texttt{null} if no user with the given id were found.
+This function gets a user with a given id (the one given in parameter). Returns \texttt{null} if no user with the given id were found.
 
 The application asks for a particular output: \texttt{get(\$id)} must return a stdClass PHP object. Such an object can be declared as follows:
 
@@ -181,7 +181,7 @@ This function updates a user whose id is \texttt{\$uid}. It doesn't check whethe
 
 
 \subsubsection{\texttt{change\_password(\$uid, \$new\_password)}}
-This function updates only a user's password. This function hashes the new password. It returns a boolean.
+This function updates only a user's password. This function must hash the new password.
 
 \subsubsection{\texttt{change\_avatar(\$uid, \$avatar\_path)}}
 This function changes the avatar of the user.

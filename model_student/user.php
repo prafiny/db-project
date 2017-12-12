@@ -45,7 +45,7 @@ function create($username, $name, $password, $email, $avatar_path) {
  * @param username the user's username
  * @param name the user's name
  * @param email the user's email
- * @warning this function doesn't check whether a user with a similar username exists
+ * @warning this function doesn't need to check whether a user with a similar username exists
  */
 function modify($uid, $username, $name, $email) {
 }
@@ -54,7 +54,7 @@ function modify($uid, $username, $name, $email) {
  * Modify a user in db
  * @param uid the user's id to modify
  * @param new_password the new password
- * @warning this function hashes the password
+ * @warning this function has to hash the password
  */
 function change_password($uid, $new_password) {
 }
