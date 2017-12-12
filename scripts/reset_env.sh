@@ -10,9 +10,9 @@ fi
 
 PURGE_MSTUD=true bash update.sh
 
-rm -r ../model_student
-cp -r /home/ubuntu/.db-project/model_student ../
-rm -r ../sql
-cp -r /home/ubuntu/.db-project/sql ../
-bash purge_db.sh "app"
-bash purge_db.sh "test"
+rm -r $SCRIPTPATH/../model_student
+cp -r /home/ubuntu/.db-project/model_student $SCRIPTPATH/../
+rm -r $SCRIPTPATH/../sql
+cp -r /home/ubuntu/.db-project/sql $SCRIPTPATH/../
+bash $SCRIPTPATH/purge_db.sh "app"
+bash $SCRIPTPATH/purge_db.sh "test"
