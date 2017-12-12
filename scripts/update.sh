@@ -24,7 +24,7 @@ clone_or_pull() {
 	if [ -e "$2" ]; then
 		git -C "$2" fetch origin
 		reslog=$(git -C "$2" log HEAD..origin/master --oneline)
-		if [[ "${reslog}" != "" ]] ; then
+		if [[ "${reslog}" != "" ]] || [ -n "$PURGE_MSTUD" ] ; then
 			git -C "$2" merge origin/master
 		else
             echo
