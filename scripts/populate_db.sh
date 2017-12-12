@@ -4,10 +4,15 @@ cd "$SCRIPTPATH/../"
 source scripts/helpers/macros.sh
 check_term
 
-if [ $# -lt 1 ] || [ -z "$1" ]; then
+case "$1" in 
+  test ) env=test;;
+  * ) env=app;;
+esac
+
+if [ $# -lt 1 ] || [ -z "$1" ] || [ "$1" != "app" ] && [ "$1" != "" ]; then
     env=app
 else
-    env=$1
+    env=test
 fi
 
 schemas_file="sql/schemas.sql"
