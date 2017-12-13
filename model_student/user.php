@@ -2,6 +2,7 @@
 namespace Model\User;
 use \Db;
 use \PDOException;
+use \PDO;
 /**
  * User model
  *

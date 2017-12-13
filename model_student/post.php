@@ -2,6 +2,7 @@
 namespace Model\Post;
 use \Db;
 use \PDOException;
+use \PDO;
 /**
  * Post
  *

@@ -2,6 +2,7 @@
 namespace Model\Hashtag;
 use \Db;
 use \PDOException;
+use \PDO;
 /**
  * Hashtag model
  *

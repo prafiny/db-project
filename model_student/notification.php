@@ -2,6 +2,7 @@
 namespace Model\Notification;
 use \Db;
 use \PDOException;
+use \PDO;
 /**
  * Notification model
  *
