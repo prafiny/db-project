@@ -18,7 +18,7 @@ backup() {
     mysql_cmd="-h$server -u$username -p$password"
             if [ "$1" = "last_is_file" ]; then
                     if ! mysql $mysql_cmd -e "use $db"; then
-                            exit
+                        mysqladmin $mysql_cmd create "$db"
                     fi
                     sav_schemas="sql/backup/$datetime.schemas.sql"
                     sav_entries="sql/backup/$datetime.entries.sql"
