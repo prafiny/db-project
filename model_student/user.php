@@ -31,7 +31,7 @@ function get($id) {
  * @param password the user's password
  * @param email the user's email
  * @param avatar_path the temporary path to the user's avatar
- * @return the id which was assigned to the created user, null if an error occured
+ * @return the id which was assigned to the created user
  * @warning this function doesn't check whether a user with a similar username exists
  * @warning this function hashes the password
  */
