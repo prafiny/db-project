@@ -9,10 +9,10 @@ case "$1" in
   * ) env=app;;
 esac
 
-if [ $# -lt 1 ] || [ -z "$1" ] || [ "$1" != "app" ] && [ "$1" != "" ]; then
-    env=app
+if [ $# -lt 1 ] || [ -z "$1" ] || [ "$1" != "test" ]; then
+    env="app"
 else
-    env=test
+    env="test"
 fi
 
 schemas_file="sql/schemas.sql"
