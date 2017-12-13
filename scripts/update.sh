@@ -30,6 +30,7 @@ clone_or_pull() {
             echo
             echo "Code uptodate, running composer update."
             echo
+            cd "$SCRIPTPATH/../"
             composer update
 			exit
 		fi
