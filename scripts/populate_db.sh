@@ -9,8 +9,8 @@ case "$1" in
   * ) env="app";;
 esac
 
-schemas_file="sql/schemas.sql"
-entries_file="sql/entries.sql"
+schemas_file="sql/schemas"
+entries_file="sql/entries"
 
 $(python3 scripts/get_yaml.py "config/db.yaml" "$env")
 mysql_cmd="-h$server -u$username -p$password"
