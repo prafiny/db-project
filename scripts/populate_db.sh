@@ -15,7 +15,9 @@ entries_file="sql/entries.sql"
 $(python3 scripts/get_yaml.py "config/db.yaml" "$env")
 mysql_cmd="-h$server -u$username -p$password"
 if [ -n "$LOCAL_DBPROJECT" ]; then
-	backup "last_is_file"
+	if [ "$env" == "app" ]; then
+            backup "last_is_file"
+        fi
         cat "$schemas_file.sql" | awk '!/^(use|create database|drop database|USE|CREATE DATABASE|DROP DATABASE)/' > buf.sql
         if [ "$env" = "app" ]; then
             cat "$entries_file.sql" | awk '!/^(use|create database|drop database|USE|CREATE DATABASE|DROP DATABASE)/' >> buf.sql
