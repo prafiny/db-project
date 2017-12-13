@@ -355,10 +355,15 @@ try {
 	\item Containing time and date information
 	\item Creating \texttt{DateTime} object from SQL Datetime field :
 	\begin{lstlisting}
-		$d = new \Datetime($sql_datetimefield);
+		$sql = 'SELECT txt, date_report FROM report';
+		$sth = $db->query($sql);
+		foreach($sth->fetchAll() as $row) {
+			$d = new \Datetime($row["date_report"]);
+		}
 	\end{lstlisting}
 	\item Saving \texttt{DateTime} object to database :
 	\begin{lstlisting}
+		// $d is a datetime object
 		$sql = "INSERT INTO report(`txt`, `date`) VALUES(:txt, :date)";
 		$sth = $dbh->prepare($sql);
 		$sth->execute(array(
