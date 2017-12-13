@@ -52,7 +52,7 @@ function get_with_joins($id) {
  * @param text the message
  * @param mentioned_authors the array of ids of users who are mentioned in the post
  * @param response_to the id of the post which the creating post responds to
- * @return the id which was assigned to the created post, null if anything got wrong
+ * @return the id which was assigned to the created post
  * @warning this function computes the date
  * @warning this function adds the mentions (after checking the users' existence)
  * @warning this function adds the hashtags
