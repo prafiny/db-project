@@ -12,9 +12,9 @@ esac
 schemas_file="sql/schemas"
 entries_file="sql/entries"
 
+if [ -n "$LOCAL_DBPROJECT" ]; then
 $(python3 scripts/get_yaml.py "config/db.yaml" "$env")
 mysql_cmd="-h$server -u$username -p$password"
-if [ -n "$LOCAL_DBPROJECT" ]; then
 	if [ "$env" == "app" ]; then
             backup "last_is_file"
         fi
