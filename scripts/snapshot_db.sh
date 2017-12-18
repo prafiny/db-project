@@ -17,7 +17,7 @@ handle_duplicate() {
 }
 
 if [ -n "$LOCAL_DBPROJECT" ]; then
-        backup
+        backup "$1"
 else
 	vagrant ssh -c "export LOCAL_DBPROJECT=true; bash /vagrant/scripts/snapshot_db.sh"
 fi
