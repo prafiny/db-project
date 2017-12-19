@@ -38,7 +38,7 @@ clone_or_pull() {
         else
                 git clone "$1" "$2"
         fi
-        if [ $? -ne 0 ];
+        if [ $? -ne 0 ]; then
             echo ""
             echo "There was an error while updating, maybe your internet connection is not working."
             echo ""
