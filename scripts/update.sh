@@ -21,22 +21,24 @@ fi
 }
 
 clone_or_pull() {
-	if [ -e "$2" ]; then
-		git -C "$2" fetch origin
-		reslog=$(git -C "$2" log HEAD..origin/master --oneline)
-		if [[ "${reslog}" != "" ]] || [ -n "$PURGE_MSTUD" ] ; then
-			git -C "$2" merge origin/master
-		else
-            echo
-            echo "Code uptodate, running composer update."
-            echo
-            cd "$SCRIPTPATH/../"
-            composer update
-			exit
-		fi
-	else
-		git clone "$1" "$2"
-	fi
+        if [ -e "$2" ]; then
+            git -C "$2" pull
+		#git -C "$2" fetch origin
+		#reslog=$(git -C "$2" log HEAD..origin/master --oneline)
+		#if [[ "${reslog}" != "" ]] || [ -n "$PURGE_MSTUD" ] ; then
+			#git -C "$2" merge origin/master
+		#else
+            #echo
+            #echo "Code uptodate, running composer update."
+            #echo
+            #cd "$SCRIPTPATH/../"
+            #composer update
+			#exit
+		#fi
+        else
+                git clone "$1" "$2"
+        fi
+        
 }
 
 if [ $# -eq 0 ] || [ "$1" != "--new-version" ]; then
