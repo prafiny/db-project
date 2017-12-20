@@ -8,10 +8,10 @@
 
     <title>Twirper</title>
 
-    <link rel="stylesheet" href="https://yui-s.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="/css/pure-min.css">
     <link rel="stylesheet" href="/css/custom.css"> 
     <!--[if lt IE 9]>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+        <script src="/css/html5shiv.js"></script>
     <![endif]-->
 </head>
 <body>
