@@ -47,7 +47,7 @@ function parse_hashtags($text) {
             function($el) {
                 if($el !== "" && $el[0] == "#") {
                     $n = substr($el, 1);
-                    return '<a href="/hashtag.php?name='.$n.'">'.$el.'</a>';
+                    return '<span class="pseudo-link" onclick="document.location.href = \'/hashtag.php?name='.$n.'\'; return false">'.$el.'</span>';
                 }
                 return $el;
             },
@@ -69,7 +69,7 @@ function parse_mentions($text) {
             function($el) {
                 if($el !== "" && $el[0] == "@") {
                     $n = substr($el, 1);
-                    return '<a href="/user.php?username='.$n.'">'.$el.'</a>';
+                    return '<span class="pseudo-link" onclick="document.location.href = \'/user.php?username='.$n.'\'; return false">'.$el.'</a>';
                 }
                 return $el;
             },

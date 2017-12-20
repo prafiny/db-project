@@ -19,7 +19,7 @@ use \PDO;
 function get($id) {
     return (object) array(
         "id" => 1337,
-        "text" => "Text",
+        "text" => "Text #test",
         "date" => new \DateTime('2011-01-01T15:03:01'),
         "author" => \Model\User\get(2)
     );

@@ -99,10 +99,6 @@ a:hover {
     vertical-align: top;
 }
 
-.post.partial .post-content:hover {
-    cursor: pointer;
-}
-
 .post a.link-post {
     text-decoration: none;
     color: black;
@@ -120,6 +116,15 @@ a:hover {
 
 .end {
     height: 30px;
+}
+
+.pseudo-link {
+    text-decoration: none;
+    color: rgb(0, 132, 180);
+}
+
+.pseudo-link:hover {
+    text-decoration: underline;
 }
 
 .modal {
