@@ -51,7 +51,6 @@ function get_with_joins($id) {
  * Create a post in db
  * @param author_id the author user's id
  * @param text the message
- * @param mentioned_authors the array of ids of users who are mentioned in the post
  * @param response_to the id of the post which the creating post responds to
  * @return the id which was assigned to the created post
  * @warning this function computes the date
