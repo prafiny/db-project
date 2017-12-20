@@ -19,7 +19,7 @@ function post($post, $html_classes="") {
                                     <?php echo htmlspecialchars($post->author->name); ?> (<?php echo htmlspecialchars($post->author->username); ?>)
                                 </a>
                             </div>
-                            <a class="link-post" href="post.php?id=<?php echo htmlspecialchars($post->id); ?>">
+                            <a class="link-post" href="post.php?id=<?php echo htmlspecialchars($post->id); ?>" onclick="document.location.href = 'post.php?id=<?php echo htmlspecialchars($post->id); ?>'; return false">
                                 <div class="text"><?php
     $p = htmlspecialchars($post->text);
     $p = \Model\Post\parse_mentions($p);
