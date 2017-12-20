@@ -132,6 +132,17 @@ The post must be linked to the user who has written it and, if it was to respond
 
 \texttt{get} is the functions that returns the post ids. It must return null if no post with the given id were found.
 
+Here is an example of what \texttt{get} should return:
+
+\begin{lstlisting}
+(object) array(
+"id" => 1337,
+"text" => "Text #test",
+"date" => new \DateTime('2011-01-01T15:03:01'),
+"author" => \Model\User\get(2)
+)
+\end{lstlisting}
+
 \subsubsection{\texttt{create(\$author\_id, \$text, \$response\_to=null)}}
 
 \texttt{create} saves a post object. It does a rather important number of things (see comments in source file).
@@ -147,6 +158,22 @@ For now, let's ignore both hashtags and mentions parsing.
 \texttt{get\_with\_joins} is a function which includes (within the post object) joined elements which are : a) the post object to which the post responds to, b) the objects for every users that liked the post and c) the hashtag it includes.
 
 For now, let's ignore the last two elements : likes and hashtag. (the attributes can be set to an empty array, with \texttt{array()}). \texttt{responds\_to} must in the contrary return a post object.
+
+Here is an example of what should return \texttt{get\_with\_joins}:
+
+\begin{lstlisting}
+(object) array(
+"id" => 1337,
+"text" => "Ima writing a post !",
+"date" => new \DateTime('2011-01-01T15:03:01'),
+"author" => \Model\User\get(2),
+"likes" => array(),
+"hashtags" => array(),
+"responds_to" => null
+)
+
+\end{lstlisting}
+
 
 \subsubsection{\texttt{get\_responses(\$id)}}
 
