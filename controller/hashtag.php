@@ -11,7 +11,7 @@ function hashtag_page($name) {
         $related_h = \Model\Hashtag\get_related_hashtags($name, 10);
     }
     catch(\Exception $e) {
-        echo "An error occured :".$e->getMessage();
+        \display_exception($e);
         exit();
     }
 

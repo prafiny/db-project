@@ -19,7 +19,7 @@ function post_page($id) {
         }
     }
     catch(\Exception $e) {
-        echo "An error occured :".$e->getMessage();
+        \display_exception($e);
         exit();
     }
     require '../view/post.php';
@@ -44,8 +44,8 @@ function post($form) {
         }
     }
     catch(\Exception $e) {
-        \Session\set_error("An error occured :".$e->getMessage());
-        header("Location: index.php");
+        \display_exception($e);
+        exit();
     }
 }
 
@@ -72,8 +72,8 @@ function respond($id, $form) {
         }
     }
     catch(\Exception $e) {
-        \Session\set_error("An error occured :".$e->getMessage());
-        header("Location: post.php?id=".$id);        
+        \display_exception($e);
+        exit();
     }
 }
 
@@ -94,8 +94,8 @@ function destroy($id) {
         header("Location: index.php");
     }
     catch(\Exception $e) {
-        \Session\set_error("An error occured :".$e->getMessage());
-        header("Location: post.php?id=".$id);        
+        \display_exception($e);
+        exit();
     }
 }
 
@@ -116,8 +116,8 @@ function like($id) {
         header("Location: post.php?id=".$id);
     }
     catch(\Exception $e) {
-        \Session\set_error("An error occured :".$e->getMessage());
-        header("Location: post.php?id=".$id);        
+        \display_exception($e);
+        exit();
     }
 }
 
@@ -138,8 +138,8 @@ function unlike($id) {
         header("Location: post.php?id=".$id);
     }
     catch(\Exception $e) {
-        \Session\set_error("An error occured :".$e->getMessage());
-        header("Location: post.php?id=".$id);        
+        \display_exception($e);
+        exit();
     }
 }
 
