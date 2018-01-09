@@ -15,6 +15,9 @@ elseif(isset($_GET['id'])) {
     else if(isset($_GET['unlike'])) {
         Controller\Post\unlike($_GET['id']);
     }
+    else if(isset($_GET['destroy'])) {
+        Controller\Post\destroy($_GET['id']);
+    }
     else {
         Controller\Post\post_page($_GET['id']);
     }
