@@ -23,6 +23,6 @@ elseif(isset($_GET['id'])) {
     }
 }
 else {
-    header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+    \headerm($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
 }
 require '../lib/closure.php';

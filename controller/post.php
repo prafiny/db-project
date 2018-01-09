@@ -5,7 +5,7 @@ function post_page($id) {
     try {
         $post = \Model\Post\get_with_joins($id);
         if(!$post) {
-            header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+            \headerm($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
             return;
         }
         $responses = \Model\Post\get_responses($id);
@@ -29,7 +29,7 @@ function post($form) {
     try {
         $user = \Session\get_user();
         if(!$user) {
-            header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
+            \headerm($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
         }
         else {
             extract($form);
@@ -53,12 +53,12 @@ function respond($id, $form) {
     try {
         $post = \Model\Post\get($id);
         if(!$post) {
-            header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+            \headerm($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
             return;
         }
         $user = \Session\get_user();
         if(!$user) {
-            header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
+            \headerm($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
             return;
         }
         extract($form);
@@ -81,12 +81,12 @@ function destroy($id) {
     try {
         $post = \Model\Post\get($id);
         if(!$post) {
-            header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+            \headerm($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
             return;
         }
         $user = \Session\get_user();
-        if(!$user || $user->id !== $id) {
-            header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
+        if(!$user || $user->id !== $post->author->id) {
+            \headerm($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
             return;
         }
         \Model\Post\destroy($id);
@@ -103,12 +103,12 @@ function like($id) {
     try {
         $post = \Model\Post\get($id);
         if(!$post) {
-            header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+            \headerm($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
             return;
         }
         $user = \Session\get_user();
         if(!$user) {
-            header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
+            \headerm($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
             return;
         }
         \Model\Post\like($user->id, $id);
@@ -125,12 +125,12 @@ function unlike($id) {
     try {
         $post = \Model\Post\get($id);
         if(!$post) {
-            header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+            \headerm($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
             return;
         }
         $user = \Session\get_user();
         if(!$user) {
-            header($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
+            \headerm($_SERVER["SERVER_PROTOCOL"]." 403 Forbidden", true, 403);
             return;
         }
         \Model\Post\unlike($user->id, $id);
