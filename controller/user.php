@@ -27,7 +27,7 @@ function user_page($username) {
         }
     }
     catch(\Exception $e) {
-        echo "An error occured :".$e->getMessage();
+        \display_exception($e);
         exit();
     }
     require "../view/user.php";
@@ -51,8 +51,8 @@ function follow($username) {
         header("Location: user.php?username=".$to_follow->username);
     }
     catch(\Exception $e) {
-        \Session\set_error("An error occured :".$e->getMessage());
-        header("Location: user.php?username=".$to_follow->username);
+        \display_exception($e);
+        exit();
     }
 }
 
@@ -74,8 +74,8 @@ function unfollow($username) {
         header("Location: user.php?username=".$to_unfollow->username);
     }
     catch(\Exception $e) {
-        \Session\set_error("An error occured :".$e->getMessage());
-        header("Location: user.php?username=".$to_unfollow->username);
+        \display_exception($e);
+        exit();
     }
 }
 
@@ -95,7 +95,7 @@ function profile() {
         $followable = false;
     }
     catch(\Exception $e) {
-        echo "An error occured :".$e->getMessage();
+        \display_exception($e);
         exit();
     }
     require "../view/user.php";
@@ -109,7 +109,7 @@ function signup_page() {
         }
     }
     catch(\Exception $e) {
-        echo "An error occured :".$e->getMessage();
+        \display_exception($e);
         exit();
     }
 
@@ -154,8 +154,8 @@ function signup($form, $files) {
         }
     }
     catch(\Exception $e) {
-        \Session\set_error("An error occured :".$e->getMessage());
-        header("Location: signup.php");
+        \display_exception($e);
+        exit();
     }
 }
 
@@ -177,7 +177,7 @@ function login($username, $password) {
         }
     }
     catch(\Exception $e) {
-        echo "An error occured :".$e->getMessage();
+        \display_exception($e);
         exit();
     }
 }
@@ -190,7 +190,7 @@ function login_page() {
         }
     }
     catch(\Exception $e) {
-        echo "An error occured :".$e->getMessage();
+        \display_exception($e);
         exit();
     }
 
@@ -203,7 +203,7 @@ function logout() {
         header("Location: index.php");
     }
     catch(\Exception $e) {
-        echo "An error occured :".$e->getMessage();
+        \display_exception($e);
         exit();
     }
 }
@@ -244,8 +244,8 @@ function update_profile($form, $files) {
         header("Location: update_profile.php");
     }
     catch(\Exception $e) {
-        \Session\set_error("An error occured :".$e->getMessage());
-        header("Location: update_profile.php");
+        \display_exception($e);
+        exit();
     }
 }
 
@@ -259,7 +259,7 @@ function update_profile_page() {
         $user = \Session\get_user();
     }
     catch(\Exception $e) {
-        echo "An error occured :".$e->getMessage();
+        \display_exception($e);
         exit();
     }
     require "../view/update_profile.php";
