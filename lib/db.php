@@ -27,7 +27,9 @@ class Db {
 
     public static function flush() {
         foreach(self::$connection->query("SHOW TABLES") as $t) {
-            self::$connection->query("SET foreign_key_checks=0; DELETE FROM " . $t[0] . "");
+            // Disable foreign key checks, empty the tables then re activate the foreign key checks.
+            // Without the re activation, the "ON DELETE CASCADE" won't work, since the foreign key checks are disabled.
+            self::$connection->query("SET foreign_key_checks=0; DELETE FROM " . $t[0] . "; SET foreign_key_checks=1;");
         }
     }
 }
