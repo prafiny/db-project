@@ -18,6 +18,10 @@ esac
 		echo $i
 		echo -------
 		phpunit --bootstrap "autoload.php" "$i"
+		if [[ $? -ne 0 ]] ; then
+			exit 1
+		fi
+
                 echo
                 echo
                 echo
