@@ -73,10 +73,10 @@ else
             cp -r --preserve=mode "$SCRIPTPATH/../$i" .
     done
     chmod a+w "$SCRIPTPATH/../www/images"
-    echo "Updating composer packages"
-    echo "--------------------------"
-    echo ""
-    composer update
+    #echo "Updating composer packages"
+    #echo "--------------------------"
+    #echo ""
+    #composer update
 fi
 
 
