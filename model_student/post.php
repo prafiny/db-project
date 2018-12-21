@@ -32,7 +32,7 @@ function get($id) {
  * @warning the author attribute is a user object
  * @warning the date attribute is a DateTime object
  * @warning the likes attribute is an array of users objects
- * @warning the hashtags attribute is an of hashtags objects
+ * @warning the hashtags attribute is an array of hashtags objects
  * @warning the responds_to attribute is either null (if the post is not a response) or a post object
  */
 function get_with_joins($id) {
