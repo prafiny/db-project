@@ -37,7 +37,7 @@ function list_popular_hashtags($length) {
 /**
  * Get posts for a hashtag
  * @param hashtag the hashtag name
- * @return a list of posts objects or null if the hashtag doesn't exist
+ * @return a list of posts objects or an empty array if the hashtag doesn't exist
  */
 function get_posts($hashtag_name) {
     return [\Model\Post\get(1)];
